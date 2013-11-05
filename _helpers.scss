@@ -1,0 +1,269 @@
+// Let's import only what we need from the compass framework
+@import "compass/css3/box-sizing";
+@import "compass/utilities/general/clearfix";
+@import "compass/css3/border-radius";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+@import "compass/css3/opacity";
+@import "compass/css3/text-shadow";
+@import "compass/css3/user-interface";
+
+// A new standard is being developed called @viewport.
+// -> http://docs.webplatform.org/wiki/css/atrules/@viewport
+// -> http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
+
+// CSS Viewport rules
+@-ms-viewport { width : device-width; }
+@-o-viewport  { width : device-width; }
+@viewport     { width : device-width; }
+
+// some reset helpers
+@mixin reset_element{
+	margin         : 0;
+	padding        : 0;
+	// no border reset
+	font-size      : 100%;
+	font           : inherit;
+	vertical-align : baseline;
+}
+@mixin reset_ul_ol{
+	list-style : none;
+}
+
+@mixin commented_clearfix{
+	/* simple clearfix to contain all elements */
+	@include clearfix;
+}
+
+// reset for pseudo elements
+@mixin pseudo($position: "absolute", $display: "block", $width: "", $height: "", $content: " "){
+	@include reset_element;
+	@include position($position, $display, $width, $height);
+	content : $content;
+}
+
+// create a positioned Element, crossbrowser, with reset margins & paddings
+@mixin position($position: absolute, $display: block, $width: "", $height: ""){
+	@include reset_element;
+
+	/* set position */
+	position : $position;
+	@if $display == inline-block {
+		// Internet Explorer Hack to make inline-block work
+		// useful "Star HTML Selector Bug" makes this possible
+		// see: http://reference.sitepoint.com/css/workaroundsfilters
+		display  : inline-block;
+		*display : inline;
+		zoom: 1;
+	}
+	@else { display : $display; }
+	@if $width  != "" { width  : $width;  }
+	@if $height != "" { height : $height; }
+}
+
+@mixin multiple_borders($top, $right:"empty", $bottom:"empty", $left:"empty"){
+	@if $right == "empty" and $bottom == "empty" and $left == "empty" {
+		border : $top;
+	} @else {
+		@if $right != "empty" and $bottom == "empty" and $left == "empty" {
+			border-top    : $top;
+			border-bottom : $top;
+			border-right  : $right;
+			border-left   : $right;
+		}
+
+		@if $right != "empty" and $bottom != "empty" and $left == "empty" {
+			border-top    : $top;
+			border-right  : $right;
+			border-left   : $right;
+			border-bottom : $bottom;
+		}
+
+		@if $right != "empty" and $bottom != "empty" and $left != "empty" {
+			border-top    : $top;
+			border-right  : $right;
+			border-bottom : $bottom;
+			border-left   : $left;
+		}
+	}
+}
+
+@mixin image-reset{
+  /* Responsive images (ensure images don't scale beyond their parents) */
+  max-width: 100%; /* Part 1: Set a maxium relative to the parent */
+  width: auto\9; /* IE7-8 need help adjusting responsive images */
+  height: auto; /* Part 2: Scale the height according to the width, otherwise you get stretching */
+
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+@mixin border-box{
+	@include box-sizing(border-box);
+}
+
+@mixin position-sticky{
+  position : -webkit-sticky;
+  position : -moz-sticky;
+  position : -ms-sticky;
+  position : -o-sticky;
+  position : sticky;
+  top      : 0px;
+}
+
+@mixin isAnimated{
+  @include transform(translate3d(0,0,0));
+  @include transform-origin(top, 0%);
+  @include perspective(1000);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}
+
+// Some basics that are needed for a button
+@mixin isButton{
+  // change the cursor to a hand
+  cursor          : pointer;
+  // set text defaults
+  text-decoration : none;
+  vertical-align  : middle;
+  // disable user selection and webkit highlight on tap
+  @include user-select(none);
+  -ms-user-select : none;
+  -webkit-tap-highlight-color : transparent;
+
+  // Fix for the Firefox padding issue on focus
+  &::-moz-focus-inner{
+    padding : 0 !important;
+    margin  : -1px !important;
+  }
+}
+
+//// Predefined Colors ////
+$black-5  : darken(#fff, 5%);
+$black-10 : darken(#fff, 10%);
+$black-15 : darken(#fff, 15%);
+$black-20 : darken(#fff, 20%);
+$black-25 : darken(#fff, 25%);
+$black-30 : darken(#fff, 30%);
+$black-35 : darken(#fff, 35%);
+$black-40 : darken(#fff, 40%);
+$black-45 : darken(#fff, 45%);
+$black-50 : darken(#fff, 50%);
+$black-55 : darken(#fff, 55%);
+$black-60 : darken(#fff, 60%);
+$black-65 : darken(#fff, 65%);
+$black-70 : darken(#fff, 70%);
+$black-75 : darken(#fff, 75%);
+$black-80 : darken(#fff, 80%);
+$black-85 : darken(#fff, 85%);
+$black-90 : darken(#fff, 90%);
+$black-95 : darken(#fff, 95%);
+$black    : darken(#fff, 100%);
+
+$white-light : #f9f9f9;
+$white       : #f4f4f4;
+$white-dark  : #efefef;
+
+$black-light : #4d4d4d;
+$black       : #414141;
+$black-dark  : #313131;
+
+$blue-light       : #268ce6;
+$blue             : #1177db;
+$blue-dark        : #0c68c3;
+
+$dark_blue-light  : shade($blue-light, 16%);
+$dark_blue        : shade($blue, 16%);
+$dark_blue-dark   : shade($blue-dark, 16%);
+
+$light_blue-light : #50b4dc;
+$light_blue       : #3fa9d2;
+$light_blue-dark  : #2b92b9;
+
+$yellow-light : #fed829;
+$yellow       : #fecf06;
+$yellow-dark  : #eebd01;
+
+$orange-light : #fd9b3e;
+$orange       : #fc8c1f;
+$orange-dark  : #ea7e0f;
+
+$green-light  : #56c35d;
+$green        : #40b547;
+$green-dark   : #38a03e;
+
+$red-light  : #e5584d;
+$red        : #d83d30;
+$red-dark   : #bc2d20;
+
+$red_orange-light  : tint(mix($red-light, $orange-light, 26%), 2%);
+$red_orange        : tint(mix($red, $orange, 26%), 2%);
+$red_orange-dark   : tint(mix($red-dark, $orange-dark, 26%), 2%);
+
+$pink-light : #fb6abe;
+$pink       : #f254b1;
+$pink-dark  : #d8479e;
+
+
+// RWD - Responsive Web Design Additions
+// --
+// em's will be used instead of pixels
+// http://blog.cloudfour.com/the-ems-have-it-proportional-media-queries-ftw/
+
+// remove units from a number
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+// Convert pixels to em
+@function toEm($px){
+  $basepx : 16px;
+
+  @return strip-units($px)/strip-units($basepx) + 0em;
+}
+
+// the breakpoints to use
+
+$phone    : toEm(220px);  // 240
+$smart    : toEm(300px);  // 320
+$tablet7  : toEm(460px);  // 480
+$tablet10 : toEm(750px);  // 768
+$pcsmall  : toEm(960px);  // 1024
+$pclarge  : toEm(1260px); // 1280
+
+// breakpoint functionality, smaller devices take priority (mobile-first)
+
+@mixin breakpoint($media) {
+  // Display the css for the default device
+  @if $media == "default" {
+    @content;
+  } @else {
+    // Or display the css for each given device using media Breakbpoints
+
+    @if ($media      == "phone") {
+      @media (min-width: $phone)
+      { @content; } }
+
+    @else if ($media == "smart") {
+      @media (min-width: $smart)
+      { @content; } }
+
+    @else if ($media == "tablet7") {
+      @media (min-width: $tablet7)
+      { @content; } }
+
+    @else if ($media == "tablet10") {
+      @media (min-width: $tablet10)
+      { @content; } }
+
+    @else if ($media == "pcsmall") {
+      @media (min-width: $pcsmall)
+      { @content; } }
+
+    @else if ($media == "pclarge") {
+      @media (min-width: $pclarge)
+      { @content; } }
+  }
+}
