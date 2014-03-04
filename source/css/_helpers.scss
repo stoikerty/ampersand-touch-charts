@@ -1,4 +1,8 @@
-// Let's import only what we need from the compass framework
+// These are helper-mixins, -variables etc
+// You will need compass & scss to use them.
+
+// Let's import what we need often, from the compass framework.
+// This selective choice speeds up the compilation time.
 @import "compass/css3/box-sizing";
 @import "compass/utilities/general/clearfix";
 @import "compass/css3/border-radius";
@@ -8,120 +12,99 @@
 @import "compass/css3/opacity";
 @import "compass/css3/text-shadow";
 @import "compass/css3/user-interface";
+@import "compass/css3/transform";
+@import "compass/css3/filter";
 
+// CSS Viewport rules
+@mixin cssViewport{
 // A new standard is being developed called @viewport.
 // -> http://docs.webplatform.org/wiki/css/atrules/@viewport
 // -> http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
 
-// CSS Viewport rules
-@-ms-viewport { width : device-width; }
-@-o-viewport  { width : device-width; }
-@viewport     { width : device-width; }
-
-// some reset helpers
-@mixin reset_element{
-	margin         : 0;
-	padding        : 0;
-	// no border reset
-	font-size      : 100%;
-	font           : inherit;
-	vertical-align : baseline;
-}
-@mixin reset_ul_ol{
-	list-style : none;
+    @-ms-viewport { width : device-width; }
+    @-o-viewport  { width : device-width; }
+    @viewport     { width : device-width; }
 }
 
-@mixin commented_clearfix{
-	/* simple clearfix to contain all elements */
-	@include clearfix;
+// Reset helpers
+@mixin resetElement{
+    margin         : 0;
+    padding        : 0;
+    // no border reset
+    font-size      : 100%;
+    font           : inherit;
+    vertical-align : baseline;
+}
+@mixin resetList($padding : 0){
+    list-style : none;
+    padding    : $padding;
 }
 
-// reset for pseudo elements
-@mixin pseudo($position: "absolute", $display: "block", $width: "", $height: "", $content: " "){
-	@include reset_element;
-	@include position($position, $display, $width, $height);
-	content : $content;
-}
-
-// create a positioned Element, crossbrowser, with reset margins & paddings
-@mixin position($position: absolute, $display: block, $width: "", $height: ""){
-	@include reset_element;
-
-	/* set position */
-	position : $position;
-	@if $display == inline-block {
-		// Internet Explorer Hack to make inline-block work
-		// useful "Star HTML Selector Bug" makes this possible
-		// see: http://reference.sitepoint.com/css/workaroundsfilters
-		display  : inline-block;
-		*display : inline;
-		zoom: 1;
-	}
-	@else { display : $display; }
-	@if $width  != "" { width  : $width;  }
-	@if $height != "" { height : $height; }
-}
-
-@mixin multiple_borders($top, $right:"empty", $bottom:"empty", $left:"empty"){
-	@if $right == "empty" and $bottom == "empty" and $left == "empty" {
-		border : $top;
-	} @else {
-		@if $right != "empty" and $bottom == "empty" and $left == "empty" {
-			border-top    : $top;
-			border-bottom : $top;
-			border-right  : $right;
-			border-left   : $right;
-		}
-
-		@if $right != "empty" and $bottom != "empty" and $left == "empty" {
-			border-top    : $top;
-			border-right  : $right;
-			border-left   : $right;
-			border-bottom : $bottom;
-		}
-
-		@if $right != "empty" and $bottom != "empty" and $left != "empty" {
-			border-top    : $top;
-			border-right  : $right;
-			border-bottom : $bottom;
-			border-left   : $left;
-		}
-	}
-}
-
-@mixin image-reset{
-  /* Responsive images (ensure images don't scale beyond their parents) */
-  max-width: 100%; /* Part 1: Set a maxium relative to the parent */
-  width: auto\9; /* IE7-8 need help adjusting responsive images */
-  height: auto; /* Part 2: Scale the height according to the width, otherwise you get stretching */
+@mixin resetImage{
+  // Responsive images (ensure images don't scale beyond their parents)
+  max-width : 100%;   // Part 1: Set a maxium relative to the parent
+  width     : auto\9; // IE7-8 need help adjusting responsive images
+  height    : auto;   // Part 2: Scale the height according to the width, otherwise you get stretching
 
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
 }
 
-@mixin border-box{
-	@include box-sizing(border-box);
+// reset for pseudo elements
+@mixin pseudo($position: "absolute", $display: "block", $width: "", $height: "", $content: " "){
+    @include resetElement;
+    @include position($position, $display, $width, $height);
+    content : $content;
 }
 
-@mixin position-sticky{
+// create a positioned Element, crossbrowser
+@mixin position($position: relative, $display: block, $width: "", $height: ""){
+    // set position
+    position : $position;
+    @if $display == inline-block {
+        // Internet Explorer Hack to make inline-block work
+        // useful "Star HTML Selector Bug" makes this possible
+        // see: http://reference.sitepoint.com/css/workaroundsfilters
+        display  : inline-block;
+        *display : inline;
+        zoom: 1;
+    }
+    @else { display : $display; }
+    @if $width  != "" { width  : $width;  }
+    @if $height != "" { height : $height; }
+}
+
+// mixin for less typing
+@mixin border-box{
+    @include box-sizing(border-box);
+}
+
+// quickly declare an element with fixed top position
+@mixin position-sticky($position : top){
+  // This is a new property, it's supported in newer browsers.
+  // There is a polyfill available for this functionality.
+  // https://github.com/filamentgroup/fixed-sticky
   position : -webkit-sticky;
   position : -moz-sticky;
   position : -ms-sticky;
   position : -o-sticky;
   position : sticky;
-  top      : 0px;
+  @if $position == top    { top    : 0; }
+  @if $position == bottom { bottom : 0; }
+  @if $position == left   { left   : 0; }
+  @if $position == right  { right  : 0; }
 }
 
+// Definition for animated elements
 @mixin isAnimated{
   @include transform(translate3d(0,0,0));
   @include transform-origin(top, 0%);
   @include perspective(1000);
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
+  @include backface-visibility(hidden);
 }
 
-// Some basics that are needed for a button
+// Definition for button elements
 @mixin isButton{
   // change the cursor to a hand
   cursor          : pointer;
@@ -138,6 +121,149 @@
     padding : 0 !important;
     margin  : -1px !important;
   }
+}
+
+// advanced mixin for creating multiple borders in one go
+@mixin multipleBorders($top, $right:"empty", $bottom:"empty", $left:"empty"){
+    @if $right == "empty" and $bottom == "empty" and $left == "empty" {
+        border : $top;
+    } @else {
+        @if $right != "empty" and $bottom == "empty" and $left == "empty" {
+            border-top    : $top;
+            border-bottom : $top;
+            border-right  : $right;
+            border-left   : $right;
+        }
+
+        @if $right != "empty" and $bottom != "empty" and $left == "empty" {
+            border-top    : $top;
+            border-right  : $right;
+            border-left   : $right;
+            border-bottom : $bottom;
+        }
+
+        @if $right != "empty" and $bottom != "empty" and $left != "empty" {
+            border-top    : $top;
+            border-right  : $right;
+            border-bottom : $bottom;
+            border-left   : $left;
+        }
+    }
+}
+
+// Prototype mixins for debuggind elements
+$proto-enabled : true;
+
+// color an element
+@mixin proto($nr: 1, $opacity : 1){
+    $enabled : $proto-enabled;
+
+    @if $enabled {
+        @if     $nr == 0  { background-color : rgba($blue, 0.13); }
+        @elseif $nr == 1  { background-color : rgba($blue-light, 0.5); }
+        @elseif $nr == 2  { background-color : rgba($yellow-light, 0.9); }
+        @elseif $nr == 3  { background-color : rgba($green-light, 0.5); }
+        @elseif $nr == 4  { background-color : rgba($orange-light, 0.9); }
+        @elseif $nr == 5  { background-color : rgba($red-light, 0.5); }
+        @elseif $nr == 6  { background-color : rgba($blue-dark, 0.9); }
+        @elseif $nr == 7  { background-color : rgba($yellow-light, 0.5); }
+        @elseif $nr == 8  { background-color : rgba($green-dark, 0.9); }
+        @elseif $nr == 9  { background-color : rgba($orange-light, 0.5); }
+        @elseif $nr == 10 { background-color : rgba($red-dark, 0.9); }
+        @else{
+            //background-color : rgba($nr, 0.8);
+            @include background-image(linear-gradient(left, rgba($nr, 1), rgba($nr, 0.4)));
+        }
+    }
+
+    @include opacity($opacity);
+}
+
+
+// make also transparent for positioning
+@mixin proto-transparent($nr: 4, $opacity : 0.7){
+    $enabled : $proto-enabled;
+
+    @include proto($nr, $opacity);
+
+    >*{ @include opacity(0.7); }
+}
+
+@mixin proto-absolute($nr: 4, $opacity : 0.7){
+    &:before{
+        z-index: -1;
+        @include position(absolute, block, 8px, 8px);
+        @include fix(top, left);
+        content : " ";
+        background-color: $green;
+
+        @include opacity($opacity);
+    }
+    &:after{
+        z-index: +1;
+        @include position(absolute, block, 4px, 4px);
+        @include fix(top, left);
+        content : " ";
+        background-color: $orange;
+
+        @include opacity($opacity);
+    }
+}
+
+// create a simple floated element
+@mixin element($float : left, $width : auto, $height : auto) {
+    @include position(relative, block, $width, $height);
+    float : $float;
+}
+
+// quickly fix an absolute-positioned element to a side/corner
+@mixin fix($vertical:top, $horizontal:left){
+    @if $vertical   == top    { top    : 0; }
+    @if $vertical   == bottom { bottom : 0; }
+    @if $horizontal == left   { left   : 0; }
+    @if $horizontal == right  { right  : 0; }
+}
+
+// lock the text, so that it doesn't jump to the next line
+@mixin lockText{
+    white-space : nowrap;
+    overflow    : hidden;
+}
+
+// make text fade out
+@mixin fontFading($color:#fff){
+    &:after{
+        @include position(absolute, block, 20px, 100%);
+        @include fix(top, right);
+        content : ' ';
+        @include background-image(linear-gradient(left, rgba($color, 0), rgba($color, 1) 95%));
+    }
+}
+
+// create simple table elements
+@mixin table($width:auto, $background-color:transparent, $border:none, $border-spacing:0px){
+  display : table;
+  width   : $width;
+  border  : $border;
+
+  border-spacing   : $border-spacing; // cellspacing : poor IE support for this
+  background-color : $background-color;
+}
+
+@mixin table-row($width:auto, $background-color:transparent){
+  display : table-row;
+  clear   : both;
+  width   : $width;
+
+  background-color : $background-color;
+}
+
+@mixin table-col($width:auto, $background-color:transparent){
+  float   : left; // fix for  buggy browsers
+  display : table-column;
+  width   : $width;
+
+  background-color : $background-color;
 }
 
 //// Predefined Colors ////
@@ -170,9 +296,9 @@ $black-light : #4d4d4d;
 $black       : #414141;
 $black-dark  : #313131;
 
-$blue-light       : #268ce6;
-$blue             : #1177db;
-$blue-dark        : #0c68c3;
+$blue-light : #268ce6;
+$blue       : #1177db;
+$blue-dark  : #0c68c3;
 
 $dark_blue-light  : shade($blue-light, 16%);
 $dark_blue        : shade($blue, 16%);
@@ -194,9 +320,9 @@ $green-light  : #56c35d;
 $green        : #40b547;
 $green-dark   : #38a03e;
 
-$red-light  : #e5584d;
-$red        : #d83d30;
-$red-dark   : #bc2d20;
+$red-light    : #e5584d;
+$red          : #d83d30;
+$red-dark     : #bc2d20;
 
 $red_orange-light  : tint(mix($red-light, $orange-light, 26%), 2%);
 $red_orange        : tint(mix($red, $orange, 26%), 2%);
@@ -213,7 +339,7 @@ $pink-dark  : #d8479e;
 // http://blog.cloudfour.com/the-ems-have-it-proportional-media-queries-ftw/
 
 // remove units from a number
-@function strip-units($number) {
+@function stripUnits($number) {
   @return $number / ($number * 0 + 1);
 }
 
@@ -221,49 +347,75 @@ $pink-dark  : #d8479e;
 @function toEm($px){
   $basepx : 16px;
 
-  @return strip-units($px)/strip-units($basepx) + 0em;
+  @return stripUnits($px)/stripUnits($basepx) + 0em;
 }
 
-// the breakpoints to use
+// The breakpoints to use
+// !default allows breakpoint to be set beforehand
+// see: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_defaults_
+$breakpoint-phone    : 220px !default;  // 240
+$breakpoint-smart    : 300px !default;  // 320
+$breakpoint-tablet7  : 460px !default;  // 480
+$breakpoint-tablet10 : 750px !default;  // 768
+$breakpoint-pcsmall  : 960px !default;  // 1024
+$breakpoint-pclarge  : 1260px !default; // 1280
 
-$phone    : toEm(220px);  // 240
-$smart    : toEm(300px);  // 320
-$tablet7  : toEm(460px);  // 480
-$tablet10 : toEm(750px);  // 768
-$pcsmall  : toEm(960px);  // 1024
-$pclarge  : toEm(1260px); // 1280
+// convert to em's for better compatibility
+$phone    : toEm($breakpoint-phone);
+$smart    : toEm($breakpoint-smart);
+$tablet7  : toEm($breakpoint-tablet7);
+$tablet10 : toEm($breakpoint-tablet10);
+$pcsmall  : toEm($breakpoint-pcsmall);
+$pclarge  : toEm($breakpoint-pclarge);
 
 // breakpoint functionality, smaller devices take priority (mobile-first)
-
 @mixin breakpoint($media) {
-  // Display the css for the default device
-  @if $media == "default" {
-    @content;
-  } @else {
-    // Or display the css for each given device using media Breakbpoints
 
-    @if ($media      == "phone") {
-      @media (min-width: $phone)
-      { @content; } }
+  @for $i from 1 through length($media) {
+    $device : nth($media, $i);
 
-    @else if ($media == "smart") {
-      @media (min-width: $smart)
-      { @content; } }
+    // Display the css for the default device
+    @if $device == "default" {
+      @content;
+    } @else {
+      // Or display the css for each given device using media Breakbpoints
 
-    @else if ($media == "tablet7") {
-      @media (min-width: $tablet7)
-      { @content; } }
+      @if ($device      == "phone") {
+        @media (min-width: $phone) and (max-width: $smart)
+        { @content; } }
 
-    @else if ($media == "tablet10") {
-      @media (min-width: $tablet10)
-      { @content; } }
+      @else if ($device == "smart") {
+        @media (min-width: $smart) and (max-width: $tablet7)
+        { @content; } }
 
-    @else if ($media == "pcsmall") {
-      @media (min-width: $pcsmall)
-      { @content; } }
+      @else if ($device == "tablet7") {
+        @media (min-width: $tablet7) and (max-width: $tablet10)
+        { @content; } }
 
-    @else if ($media == "pclarge") {
-      @media (min-width: $pclarge)
-      { @content; } }
+      @else if ($device == "tablet10") {
+        @media (min-width: $tablet10) and (max-width: $pcsmall)
+        { @content; } }
+
+      @else if ($device == "pcsmall") {
+        @media (min-width: $pcsmall) and (max-width: $pclarge)
+        { @content; } }
+
+      @else if ($device == "pclarge") {
+        @media (min-width: $pclarge)
+        { @content; } }
+    }
   }
 }
+
+
+// Misc Documentation
+//
+// - min-height doesn't work on tables
+//   height is the equivalent
+//   see: http://stackoverflow.com/questions/7790222/css-display-table-min-height-not-working
+//
+//
+
+
+// -----------------------------------------------------------------
+//   > @stoikerty https://github.com/stoikerty/stk-toolbox-helpers
