@@ -10,21 +10,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-  <!-- general styles for the project -->
-  <%= stylesheet_link_tag "body" %>
-
-  <!-- :::::: ::::::   your css    :::::: :::::: -->
+  <!-- :::::: ::::::   css    :::::: :::::: -->
   <%= stylesheet_link_tag "style" %>
 
 </head>
 <body>
-  <!-- :::::: ::::::   your html   :::::: :::::: -->
+  <!-- :::::: ::::::   html   :::::: :::::: -->
   <%= yield %>
 
   <!-- polyfill for using modern javascript, see _vanillaJS_ftw.md -->
   <script type="text/javascript" src="js/aight.min.js"></script>
 
-  <!-- :::::: ::::::   your js     :::::: :::::: -->
+  <!-- :::::: ::::::   js     :::::: :::::: -->
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
