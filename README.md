@@ -1,4 +1,11 @@
-How to use this folder
+vanilla touch charts
+====================
+
+A simple chart-interface using html elements that can be modified after the values have been entered.
+
+---------------------
+
+Technical details: How to use this folder
 ======================
 
 The source code is built using ["middleman"](http://middlemanapp.com/)
