@@ -21,14 +21,24 @@
         return '<body><div data-hook="interface-container" class="interface-container"></div></body>';
     };
 
-    // chart\input\item-series.jade compiled template
-    templatizer["chart"]["input"]["item-series"] = function tmpl_chart_input_item_series() {
-        return '<ul class="series"><input placeholder="" maxlength="100" class="item"/></ul>';
+    // chart\input\dataSet.jade compiled template
+    templatizer["chart"]["input"]["dataSet"] = function tmpl_chart_input_dataSet() {
+        return '<div class="data-set"><div class="label"></div><ul data-hook="data-set"></ul></div>';
     };
 
-    // chart\input\title-item.jade compiled template
-    templatizer["chart"]["input"]["title-item"] = function tmpl_chart_input_title_item() {
-        return '<ul class="title"><input placeholder="" maxlength="100" class="item"/></ul>';
+    // chart\input\dataSetItem.jade compiled template
+    templatizer["chart"]["input"]["dataSetItem"] = function tmpl_chart_input_dataSetItem() {
+        return '<li class="item"><input placeholder="" maxlength="100"/></li>';
+    };
+
+    // chart\input\series.jade compiled template
+    templatizer["chart"]["input"]["series"] = function tmpl_chart_input_series() {
+        return '<li class="series-container"><div class="title"></div><ul data-hook="series" class="series"></ul></li>';
+    };
+
+    // chart\input\seriesItem.jade compiled template
+    templatizer["chart"]["input"]["seriesItem"] = function tmpl_chart_input_seriesItem() {
+        return '<li class="item"></li>';
     };
 
     // chart\interface.jade compiled template
@@ -36,14 +46,14 @@
         return '<div class="chart-interface"><div data-hook="input" class="input"></div><div data-hook="output" class="output"></div></div>';
     };
 
-    // chart\output\chart-item.jade compiled template
-    templatizer["chart"]["output"]["chart-item"] = function tmpl_chart_output_chart_item() {
-        return '<ul class="chart-item"><div class="series-title"></div><div class="series-container"></div></ul>';
+    // chart\output\dataSet.jade compiled template
+    templatizer["chart"]["output"]["dataSet"] = function tmpl_chart_output_dataSet() {
+        return '<ul class="data-set"><div placeholder="" maxlength="100" class="item"></div></ul>';
     };
 
-    // chart\output\series-item.jade compiled template
-    templatizer["chart"]["output"]["series-item"] = function tmpl_chart_output_series_item() {
-        return '<ul class="series"><li class="item"></li></ul>';
+    // chart\output\series.jade compiled template
+    templatizer["chart"]["output"]["series"] = function tmpl_chart_output_series() {
+        return '<ul class="series"><div placeholder="" maxlength="100" class="item"></div></ul>';
     };
 
     return templatizer;
