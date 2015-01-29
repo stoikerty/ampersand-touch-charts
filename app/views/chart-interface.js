@@ -6,14 +6,16 @@ module.exports = View.extend({
     autoRender : true,
 
     initialize : function(){
-        document.title = '{ Project }';
     },
     render : function(options){
         this.renderWithTemplate();
 
+        console.log('outputting interface');
+
         this.inputEl = this.queryByHook("input");
         this.outputEl = this.queryByHook("output");
-        
-        console.log('document body rendered');
+
+        console.log(this.inputEl);
+        console.log(this.outputEl);
     }
 });
