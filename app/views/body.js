@@ -23,7 +23,7 @@ console.log(seriesItemModel.serialize());
 
 
 var DataSetCollection = require('../models/data-set');
-window.dataSetCollection = new DataSetCollection();
+var dataSetCollection = new DataSetCollection();
 var SeriesCollection = require('../models/series');
 
 dataSetCollection.add({

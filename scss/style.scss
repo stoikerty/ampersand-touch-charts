@@ -9,7 +9,7 @@ body{
 *{ @include border-box; }
 
 .chart-interface{
-    @include position(relative, block, 200px);
+    @include position(relative, block, 100%);
     float : left;
     padding : 10px;
     @include proto($blue);
@@ -21,6 +21,40 @@ body{
         padding : 4px;
         @include proto($green);
         &:before{ content : 'chart-input'; color : #fff; }
+
+        .series-item .label{
+            @include opacity(0.5);
+        }
+
+        .data-set-container{
+            @include position(relative, block, 100%);
+            float : left;
+            clear : both;
+
+            ul.data-set{
+                @include position(relative, block, 100%);
+                float : left;
+
+                li.data-set-item{
+                    @include position(relative, block, 100%);
+                    float : left;
+
+                    .series-container{
+                        @include position(relative, block, 100%);
+                        float : left;
+                        ul.series{
+                            @include position(relative, block);
+                            float : left;
+
+                            li.series-item{
+                                @include position(relative, block);
+                                float : left;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     .output{
         @include position(relative, block, 100%);

@@ -23,22 +23,22 @@
 
     // chart\input\dataSet.jade compiled template
     templatizer["chart"]["input"]["dataSet"] = function tmpl_chart_input_dataSet() {
-        return '<div class="data-set"><div data-hook="title" class="title"></div><ul data-hook="data-set"></ul></div>';
+        return '<div class="data-set-container"><div data-hook="title" class="title"></div><ul data-hook="data-set" class="data-set"></ul></div>';
     };
 
     // chart\input\dataSetItem.jade compiled template
     templatizer["chart"]["input"]["dataSetItem"] = function tmpl_chart_input_dataSetItem() {
-        return '<li class="item"><input data-hook="item" placeholder="" maxlength="100"/></li>';
+        return '<li class="data-set-item"></li>';
     };
 
     // chart\input\series.jade compiled template
     templatizer["chart"]["input"]["series"] = function tmpl_chart_input_series() {
-        return '<li class="series-container"><div data-hook="title" class="title"></div><ul data-hook="series" class="series"></ul></li>';
+        return '<div class="series-container"><input data-hook="label" class="label"/><ul data-hook="series" class="series"></ul></div>';
     };
 
     // chart\input\seriesItem.jade compiled template
     templatizer["chart"]["input"]["seriesItem"] = function tmpl_chart_input_seriesItem() {
-        return '<li data-hook="item" class="item"></li>';
+        return '<li class="series-item"><input data-hook="value" class="value"/></li>';
     };
 
     // chart\interface.jade compiled template
