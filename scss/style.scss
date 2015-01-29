@@ -1,3 +1,33 @@
 // some compass and custom helpers for starting out
 @import "_global-config.scss";
 @import "body";
+
+body{
+    font-size : 16px;
+}
+
+*{ @include border-box; }
+
+.chart-interface{
+    @include position(relative, block, 200px);
+    float : left;
+    padding : 10px;
+    @include proto($blue);
+
+    .input{
+        @include position(relative, block, 100%);
+        float : left;
+        min-height : 30px;
+        padding : 4px;
+        @include proto($green);
+        &:before{ content : 'chart-input'; color : #fff; }
+    }
+    .output{
+        @include position(relative, block, 100%);
+        float : left;
+        min-height : 30px;
+        padding : 4px;
+        @include proto($orange);
+        &:before{ content : 'chart-output'; color : #fff; }
+    }
+}
