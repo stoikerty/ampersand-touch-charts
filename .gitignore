@@ -223,3 +223,9 @@ pip-log.txt
 #############
 
 node_modules/
+
+#############
+## Sass
+#############
+
+.sass-cache/
