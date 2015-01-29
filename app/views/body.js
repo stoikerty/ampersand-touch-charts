@@ -2,6 +2,7 @@ var View = require('ampersand-view');
 var templates = require('../templates');
 
 var DataSetModel = require('../models/data-set');
+var SeriesItemModel = require('../models/series-item');
 
 window.dataSetModel = new DataSetModel({
     id : '1',
@@ -9,8 +10,15 @@ window.dataSetModel = new DataSetModel({
     seriesList : ['series-a', 'series-b'],
 });
 
-// see what is inside the state model
+window.seriesItemModel = new SeriesItemModel({
+    id : '1',
+    label : 'Orders',
+    value : 500
+});
+
+// see what is inside the state models
 console.log(dataSetModel.serialize());
+console.log(seriesItemModel.serialize());
 
 
 module.exports = View.extend({
