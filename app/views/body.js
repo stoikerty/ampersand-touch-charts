@@ -1,6 +1,13 @@
 var View = require('ampersand-view');
 var templates = require('../templates');
 
+/*
+
+Code is working,
+let's comment it out for later extension & use
+
+*/
+/*
 var DataSetModel = require('../models/data-set');
 var SeriesItemModel = require('../models/series-item');
 
@@ -19,7 +26,7 @@ window.seriesItemModel = new SeriesItemModel({
 // see what is inside the state models
 console.log(dataSetModel.serialize());
 console.log(seriesItemModel.serialize());
-
+*/
 
 module.exports = View.extend({
     template : templates.body,
