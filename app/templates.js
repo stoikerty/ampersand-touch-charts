@@ -20,8 +20,8 @@
         return '<body><div class="chart-input"></div><div class="chart-output"></div></body>';
     };
 
-    // cart-input\series-item.jade compiled template
-    templatizer["cart-input"]["series-item"] = function tmpl_cart_input_series_item() {
+    // cart-input\item-series.jade compiled template
+    templatizer["cart-input"]["item-series"] = function tmpl_cart_input_item_series() {
         return '<ul class="series"><input placeholder="" maxlength="100" class="item"/></ul>';
     };
 
