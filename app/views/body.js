@@ -23,11 +23,17 @@ console.log(seriesItemModel.serialize());
 
 
 var DataSetModel = require('../models/data-set');
-var SeriesItemModel = require('../models/series-item');
+window.dataSetModel = new DataSetModel();
 
-var dataSetModel = new DataSetModel({
-    id : '1',
+dataSetModel.add({
+    id : '0',
     title : '5 inch gloss',
+    seriesList : ['series-a', 'series-b'],
+});
+
+dataSetModel.add({
+    id : '1',
+    title : '5 inch lustre',
     seriesList : ['series-a', 'series-b'],
 });
 
@@ -47,7 +53,7 @@ module.exports = View.extend({
         // create the interface view
         this.view = new ChartInterfaceView({
             el : this.interfaceContainerEl,
-            model : dataSetModel
+            collection : dataSetModel
         });
     }
 });

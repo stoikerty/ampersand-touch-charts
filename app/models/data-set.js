@@ -1,9 +1,6 @@
-var AmpersandState = require('ampersand-state');
+var Collection = require('ampersand-collection');
+var dataSetItem = require('./data-set-item');
 
-module.exports = AmpersandState.extend({
-    props : {
-        id : 'string',
-        title : 'string',
-        seriesList : 'array'
-    }
+module.exports = Collection.extend({
+    model: dataSetItem
 });
