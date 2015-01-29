@@ -10,7 +10,7 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        console.log('outputting interface');
+        console.log('outputting interface + some css');
 
         this.inputEl = this.queryByHook("input");
         this.outputEl = this.queryByHook("output");
