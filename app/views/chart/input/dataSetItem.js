@@ -1,9 +1,9 @@
 var View = require('ampersand-view');
 var templates = require('../../../templates');
-var SeriesView = require('./seriesItem');
+var SeriesView = require('./series');
 
 module.exports = View.extend({
-    template : templates.chart.input.series,
+    template : templates.chart.input.dataSetItem,
     autoRender : true,
 
     initialize : function(){

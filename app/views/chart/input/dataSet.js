@@ -5,6 +5,13 @@ var DataSetItemView = require('./dataSetItem');
 module.exports = View.extend({
     template : templates.chart.input.dataSet,
     autoRender : true,
+    
+    bindings: {
+        'model.title': {
+            type: 'text',
+            hook: 'title'
+        }
+    },
 
     initialize : function(){
     },
@@ -12,7 +19,7 @@ module.exports = View.extend({
         this.renderWithTemplate();
 
         this.renderCollection(
-            this.collection.at(0).series,
+            this.collection,
             DataSetItemView,
             this.queryByHook('data-set')
         );

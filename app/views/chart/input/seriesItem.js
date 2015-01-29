@@ -10,6 +10,10 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
+        //console.log(this.model);
+
+        //console.log(this.collection.serialize());
+
         // console.log('item : ',
         //     this.model.label,
         //     this.model.value
