@@ -9,14 +9,7 @@ let's comment it out for later extension & use
 
 */
 /*
-var DataSetModel = require('../models/data-set');
 var SeriesItemModel = require('../models/series-item');
-
-window.dataSetModel = new DataSetModel({
-    id : '1',
-    title : '5 inch gloss',
-    seriesList : ['series-a', 'series-b'],
-});
 
 window.seriesItemModel = new SeriesItemModel({
     id : '1',
@@ -25,9 +18,18 @@ window.seriesItemModel = new SeriesItemModel({
 });
 
 // see what is inside the state models
-console.log(dataSetModel.serialize());
 console.log(seriesItemModel.serialize());
 */
+
+
+var DataSetModel = require('../models/data-set');
+var SeriesItemModel = require('../models/series-item');
+
+var dataSetModel = new DataSetModel({
+    id : '1',
+    title : '5 inch gloss',
+    seriesList : ['series-a', 'series-b'],
+});
 
 module.exports = View.extend({
     template : templates.body,
@@ -44,7 +46,8 @@ module.exports = View.extend({
 
         // create the interface view
         this.view = new ChartInterfaceView({
-            el : this.interfaceContainerEl
+            el : this.interfaceContainerEl,
+            model : dataSetModel
         });
     }
 });

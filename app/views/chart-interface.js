@@ -17,5 +17,7 @@ module.exports = View.extend({
 
         console.log(this.inputEl);
         console.log(this.outputEl);
+
+        console.log(this.model.serialize());
     }
 });
