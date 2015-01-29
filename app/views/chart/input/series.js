@@ -11,11 +11,8 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        window.currentModel = this.model;
-        //console.log(this.collection.at(0));
-
         window.currentView = this.renderCollection(
-            this.model.collection,
+            this.model.series,
             SeriesItemView,
             this.queryByHook('series')
         );

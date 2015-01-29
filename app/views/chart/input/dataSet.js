@@ -18,12 +18,6 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        // what 
-        //console.log(this.collection.id);
-        //console.log(this.collection.at(this.collection.id));
-
-        //window.currentModel = this.model;
-
         this.renderCollection(
             this.model.collection,
             DataSetItemView,

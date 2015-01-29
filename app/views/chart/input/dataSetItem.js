@@ -18,10 +18,8 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        //console.log(this.model);
-
         this.renderCollection(
-            this.model.series,
+            this.model.collection,
             SeriesView,
             this.queryByHook('series')
         );
