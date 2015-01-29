@@ -1,6 +1,6 @@
 var Collection = require('ampersand-collection');
-var seriesItem = require('./series-item');
+var series_item = require('./series_item');
 
 module.exports = Collection.extend({
-    model: seriesItem
+    model: series_item
 });

@@ -1,6 +1,6 @@
 var View = require('ampersand-view');
 var templates = require('../../../templates');
-var DataSetItemView = require('./dataSetItem');
+var DataSet_itemView = require('./dataSet_item');
 
 module.exports = View.extend({
     template : templates.chart.input.dataSet,
@@ -17,11 +17,18 @@ module.exports = View.extend({
     },
     render : function(options){
         this.renderWithTemplate();
+        
+        console.log('dataSet');
 
-        this.renderCollection(
-            this.model.collection,
-            DataSetItemView,
-            this.queryByHook('data-set')
-        );
+        this.view = new DataSet_itemView({
+            el : this.queryByHook('dataSet'),
+            collection : this.model.series
+        });
+
+        // this.renderCollection(
+        //     this.model.collection,
+        //     DataSet_itemView,
+        //     this.queryByHook('dataSet')
+        // );
     }
 });

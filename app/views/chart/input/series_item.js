@@ -2,7 +2,7 @@ var View = require('ampersand-view');
 var templates = require('../../../templates');
 
 module.exports = View.extend({
-    template : templates.chart.input.seriesItem,
+    template : templates.chart.input.series_item,
     autoRender : true,
     
     bindings: {
@@ -17,6 +17,6 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        //
+        console.log('     - series_item');
     }
 });

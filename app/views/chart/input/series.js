@@ -1,6 +1,6 @@
 var View = require('ampersand-view');
 var templates = require('../../../templates');
-var SeriesItemView = require('./seriesItem');
+var Series_itemView = require('./series_item');
 
 module.exports = View.extend({
     template : templates.chart.input.series,
@@ -11,9 +11,13 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        window.currentView = this.renderCollection(
-            this.model.series,
-            SeriesItemView,
+        //window.currentModel = this.model;
+
+        console.log('   - series');
+
+        this.renderCollection(
+            this.collection,
+            Series_itemView,
             this.queryByHook('series')
         );
     }

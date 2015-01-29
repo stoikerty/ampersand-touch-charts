@@ -20,7 +20,7 @@ module.exports = View.extend({
         console.log(this.inputEl);
         console.log(this.outputEl);
 
-        console.log('chart data-set : ', this.collection.serialize());
+        //console.log('chart data-set : ', this.collection.serialize());
 
         // this.renderCollection(
         //     this.collection.at(1).series,
@@ -30,8 +30,7 @@ module.exports = View.extend({
 
         // create the interface view
         this.view = new InputView({
-            el : this.inputEl,
-            collection : this.collection
+            el : this.inputEl
         });
 
         // // create the interface view

@@ -1,6 +1,6 @@
 var Collection = require('ampersand-collection');
-var dataSetItem = require('./data-set-item');
+var dataSet_item = require('./dataSet_item');
 
 module.exports = Collection.extend({
-    model: dataSetItem
+    model: dataSet_item
 });

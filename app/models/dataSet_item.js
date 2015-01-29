@@ -5,6 +5,6 @@ module.exports = AmpersandState.extend({
     props : {
         id : 'string',
         title : 'string',
-        series : Series
+        series : new Series
     }
 });

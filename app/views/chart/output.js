@@ -10,6 +10,6 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        console.log('output: data-set');
+        console.log('output: dataSet');
     }
 });
