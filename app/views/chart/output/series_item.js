@@ -18,8 +18,8 @@ module.exports = View.extend({
                 el.style.height = (value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
 
                 // NOTE: sadly this doesn't work
-                // when the maxDataSetValue, everything gets
-                // rerendered and destroyed :(
+                // when the maxDataSetValue changes,
+                // everything gets rerendered and destroyed :(
                 this.renderCSSonly = true;
             },
             hook: 'value'
