@@ -21,6 +21,9 @@ module.exports = View.extend({
         this.view = new SeriesView({
             el : this.queryByHook('series-container'),
             collection : this.model.series,
+
+            // only added the model for checking out something
+            // remove if not needed anymore
             model : this.model
         });
     }

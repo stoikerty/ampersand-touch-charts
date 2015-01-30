@@ -4,7 +4,9 @@ var DataSet = require('./dataSet');
 module.exports = AmpersandState.extend({
     props : {
         id : 'string',
-        maxDataSetValue : 'integer',
+        maxDataSetValue : 'integer'
+    },
+    collections : {
         dataSet : DataSet
     }
 });

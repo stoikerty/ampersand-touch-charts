@@ -17,9 +17,6 @@ module.exports = View.extend({
     },
 
     initialize : function(){
-        window.initialized = (window.initialized + 1) || 1;
-        console.log('initialized output series "' + this.parent.model.caption + '" : ' + window.initialized + ' : '
-            + this.model.name + ' ' + this.model.value);
     },
     render : function(options){
         this.renderWithTemplate();
