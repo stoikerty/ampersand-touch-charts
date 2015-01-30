@@ -10,7 +10,7 @@ body{
 
 .chart-interface{
     @include position(relative, block, 100%);
-    padding : 10px 0;
+    padding : 10px $grid;
     margin : 0 auto;
     max-width : 800px;
 
@@ -56,7 +56,7 @@ body{
     clear : both;
 
     $series-name-size : 120px;
-    $dataSet-width    : 140px;
+    $dataSet-width    : 100px;
 
     ul.dataSet{
         @include resetList;
@@ -73,14 +73,16 @@ body{
             padding : 0px;
 
             .caption{
-                @include position(relative, block, 80%);
+                @include position(relative, block, $dataSet-width - $grid);
                 float : left;
-                left  : 10%;
+                left  : $grid / 2;
                 min-height: 20px;
-                margin-bottom : $grid;
+                margin-top    : $grid;
+                margin-bottom : $grid / 2;
                 padding : 2px;
-                color : #fff;
 
+                font-size : 13px;
+                color : #fff;
                 text-align : center;
 
                 @include proto(3);
