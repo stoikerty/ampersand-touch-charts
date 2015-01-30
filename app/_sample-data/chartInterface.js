@@ -4,9 +4,11 @@ var SeriesCollection = require('../models/series');
 
 
 var chartInterface = new ChartInterfaceModel();
+//window.chartInterface = chartInterface;
 
 chartInterface.minDataSetValue = 0;
 chartInterface.maxDataSetValue = 0;
+chartInterface.renderCSS = false;
 chartInterface.dataSet = new DataSetCollection();
 
 chartInterface.dataSet.add({

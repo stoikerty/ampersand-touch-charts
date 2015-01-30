@@ -4,6 +4,7 @@ var templates = require('../../../templates');
 module.exports = View.extend({
     template : templates.chart.output.series_item,
     autoRender : true,
+    renderCSSonly : false,
     
     bindings: {
         'model.name': {
@@ -15,6 +16,11 @@ module.exports = View.extend({
                 // when the model changes, we don't want to re-render
                 // only change the height for the element
                 el.style.height = (value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
+
+                // NOTE: sadly this doesn't work
+                // when the maxDataSetValue, everything gets
+                // rerendered and destroyed :(
+                this.renderCSSonly = true;
             },
             hook: 'value'
         }
@@ -22,13 +28,24 @@ module.exports = View.extend({
 
     initialize : function(options){
         this.chartInterfaceModel = options.chartInterfaceModel;
+
+        this.model.on('change:value', function (model, val) {
+            console.log('value is now: ', val);
+            this.renderCSSonly = true;
+        });
     },
     render : function(options){
-        //if (options && !options.renderTemplate) this.renderWithTemplate();
-        this.renderWithTemplate();
+        if (!this.renderCSSonly){
+            this.renderWithTemplate();
+        }
+
+        // caching element, still destroys an elment if the model changes
+        this.cacheElements({
+            valueEl: '[data-hook=value]'
+        });
 
         // start by correctly rendering all values on the first run
-        this.queryByHook('value').style.height = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
+        this.valueEl.style.height = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
 
         // fit every element of the collection into the series-chart
         this.el.style.width = (100 / this.collection.length) + '%';

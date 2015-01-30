@@ -17,8 +17,10 @@ module.exports = View.extend({
         this.chartInterfaceModel = options.chartInterfaceModel;
     },
     render : function(options){
-        //if (options && !options.renderTemplate) this.renderWithTemplate();
-        this.renderWithTemplate();
+        //console.log(this.chartInterfaceModel.renderCSS);
+        //if (!this.chartInterfaceModel.renderCSS){
+            this.renderWithTemplate();
+        //}
 
         this.view = new SeriesView({
             el : this.queryByHook('series-container'),

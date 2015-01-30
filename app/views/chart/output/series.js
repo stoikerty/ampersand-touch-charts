@@ -10,7 +10,6 @@ module.exports = View.extend({
         this.chartInterfaceModel = options.chartInterfaceModel;
     },
     render : function(options){
-        //if (options && !options.renderTemplate) this.renderWithTemplate();
         this.renderWithTemplate();
 
         this.renderCollection(

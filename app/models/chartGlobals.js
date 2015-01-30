@@ -4,6 +4,7 @@ module.exports = AmpersandState.extend({
     props : {
         id : 'string',
         minDataSetValue : 'integer',
-        maxDataSetValue : 'integer'
+        maxDataSetValue : 'integer',
+        renderCSS : 'boolean'
     }
 });
