@@ -1,10 +1,10 @@
 var AmpersandState = require('ampersand-state');
-var Series = require('./series');
+var DataSet = require('./dataSet');
 
 module.exports = AmpersandState.extend({
     props : {
         id : 'string',
-        caption : 'string',
-        series : Series
+        maxDataSetValue : 'integer',
+        dataSet : DataSet
     }
 });

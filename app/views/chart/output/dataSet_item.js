@@ -20,7 +20,8 @@ module.exports = View.extend({
 
         this.view = new SeriesView({
             el : this.queryByHook('series-container'),
-            collection : this.model.series
+            collection : this.model.series,
+            model : this.model
         });
     }
 });

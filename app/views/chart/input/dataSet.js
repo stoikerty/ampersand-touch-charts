@@ -11,8 +11,10 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
+        window.model = this.model;
+
         this.renderCollection(
-            this.collection,
+            this.model.dataSet,
             DataSet_itemView,
             this.queryByHook('dataSet')
         );

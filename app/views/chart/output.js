@@ -11,11 +11,11 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
         
-        console.log('output');
+        console.log('interface-output');
 
         this.view = new DataSetView({
             el : this.queryByHook('output-container'),
-            collection : this.collection
+            model : this.model
         });
     }
 });

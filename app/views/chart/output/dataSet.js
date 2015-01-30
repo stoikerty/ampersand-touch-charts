@@ -12,7 +12,7 @@ module.exports = View.extend({
         this.renderWithTemplate();
 
         this.renderCollection(
-            this.collection,
+            this.model.dataSet,
             DataSet_itemView,
             this.queryByHook('dataSet')
         );

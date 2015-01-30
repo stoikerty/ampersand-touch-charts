@@ -11,11 +11,11 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
         
-        console.log('input');
+        console.log('interface-input');
 
         this.view = new DataSetView({
             el : this.queryByHook('input-container'),
-            collection : this.collection
+            model : this.model
         });
     }
 });
