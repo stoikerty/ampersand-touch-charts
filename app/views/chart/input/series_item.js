@@ -4,6 +4,11 @@ var templates = require('../../../templates');
 module.exports = View.extend({
     template : templates.chart.input.series_item,
     autoRender : true,
+
+    events: {
+        'keyup [data-hook=value]': 'changeValue',
+        'blur [data-hook=value]': 'changeValue'
+    },
     
     bindings: {
         'model.name': {
@@ -20,5 +25,19 @@ module.exports = View.extend({
     },
     render : function(options){
         this.renderWithTemplate();
+
+        this.valueEl = this.queryByHook('value');
+    },
+
+    // 'save' point.
+    changeValue: function () {
+        var val = this.valueEl.value.trim();
+        if (val) {
+            this.model.set({
+                value: val
+            });
+        } else {
+            //this.model.destroy();
+        }
     }
 });
