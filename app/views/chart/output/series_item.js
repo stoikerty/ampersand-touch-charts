@@ -11,7 +11,7 @@ module.exports = View.extend({
             hook: 'name'
         },
         'model.value': {
-            type: 'value',
+            type: 'text',
             hook: 'value'
         }
     },
