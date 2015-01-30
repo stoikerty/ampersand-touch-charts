@@ -6,6 +6,10 @@ module.exports = View.extend({
     autoRender : true,
     
     bindings: {
+        'model.name': {
+            type: 'text',
+            hook: 'name'
+        },
         'model.value': {
             type: 'value',
             hook: 'value'

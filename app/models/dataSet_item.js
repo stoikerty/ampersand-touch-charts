@@ -4,7 +4,7 @@ var Series = require('./series');
 module.exports = AmpersandState.extend({
     props : {
         id : 'string',
-        title : 'string',
+        caption : 'string',
         series : new Series
     }
 });

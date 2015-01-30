@@ -5,13 +5,6 @@ var DataSet_itemView = require('./dataSet_item');
 module.exports = View.extend({
     template : templates.chart.input.dataSet,
     autoRender : true,
-    
-    bindings: {
-        'model.title': {
-            type: 'text',
-            hook: 'title'
-        }
-    },
 
     initialize : function(){
     },
@@ -19,12 +12,6 @@ module.exports = View.extend({
         this.renderWithTemplate();
         
         console.log('dataSet');
-
-        // render one dataSet_item for each existing data-set
-        // this.view = new DataSet_itemView({
-        //     el : this.queryByHook('dataSet'),
-        //     collection : this.collection
-        // });
 
         this.renderCollection(
             this.collection,

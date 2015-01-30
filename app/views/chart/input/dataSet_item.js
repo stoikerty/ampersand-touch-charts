@@ -6,23 +6,19 @@ module.exports = View.extend({
     template : templates.chart.input.dataSet_item,
     autoRender : true,
     
+    bindings: {
+        'model.caption': {
+            type: 'text',
+            hook: 'caption'
+        }
+    },
+    
     initialize : function(){
     },
     render : function(options){
         this.renderWithTemplate();
-
-        // this.view = new SeriesView({
-        //     el : this.queryByHook('series'),
-        //     model : this.model
-        // });
         
         console.log(' - dataSet_item');
-
-        // this.renderCollection(
-        //     this.collection,
-        //     SeriesView,
-        //     this.queryByHook('dataSet_item')
-        // );
 
         this.view = new SeriesView({
             el : this.queryByHook('series-container'),

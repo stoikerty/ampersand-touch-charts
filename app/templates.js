@@ -28,7 +28,7 @@
 
     // chart\input\dataSet_item.jade compiled template
     templatizer["chart"]["input"]["dataSet_item"] = function tmpl_chart_input_dataSet_item() {
-        return '<li class="dataSet_item"><div class="caption"></div><div data-hook="series-container" class="series-container"></div></li>';
+        return '<li class="dataSet_item"><div data-hook="caption" class="caption"></div><div data-hook="series-container" class="series-container"></div></li>';
     };
 
     // chart\input\series.jade compiled template
