@@ -42,27 +42,84 @@ body{
     float : left;
     clear : both;
 
-    .title{
+    $series-name-size : 120px;
+    $dataSet-width    : 140px;
+
+    ul.dataSet{
+        @include resetList;
         @include position(relative, block, 100%);
         float : left;
-    }
+        margin : 0;
+        padding : 0 0 0 $series-name-size;
+        white-space : nowrap;
+        overflow-y : hidden; 
+        overflow-x : scroll; 
 
-    .series-container{
-        @include position(relative, block, 100%);
-        float : left;
+        li.dataSet_item{
+            @include position(relative, inline-block, $dataSet-width);
+            padding : 0px;
 
-        .label{
-            @include position(relative, block);
-            float : left;
-        }
+            .caption{
+                @include position(relative, block, 80%);
+                float : left;
+                left  : 10%;
+                min-height: 20px;
+                margin-bottom : $grid;
+                @include proto(3);
 
-        ul.series{
-            @include position(relative, block);
-            float : left;
+                &:before{
+                    @include position(absolute, block);
+                    content : 'caption';
+                    margin : 2px;
+                    color : #fff;
+                }
+            }
 
-            li.series_item{
+            .series-container{
                 @include position(relative, block);
                 float : left;
+
+                ul.series{
+                    @include resetList;
+                    @include position(relative, block, 100%);
+                    float : left;
+                    margin : 0;
+                    padding : 0;
+
+                    li.series_item{
+                        @include position(relative, block, 100%);
+                        float : left;
+                        margin-bottom : $grid;
+
+                        .name{
+                            // don't display the name of the series
+                            // for all series items
+                            display: none;
+                        }
+
+                        .value{
+                            @include position(relative, block, 100%);
+                            float : left;
+                        }
+                    }
+                }
+            }
+
+            // only display the series name once
+            &:first-child .series-container
+              .series:first-child .series_item .name{
+                @include position(absolute, block, $series-name-size - $grid);
+                float : left;
+                min-height: 20px;
+                @include proto(2);
+                left : -$series-name-size;
+
+                &:before{
+                    @include position(absolute, block);
+                    content : 'series name';
+                    margin : 2px;
+                    color : #fff;
+                }
             }
         }
     }
