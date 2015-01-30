@@ -5,6 +5,7 @@ var SeriesCollection = require('../models/series');
 
 var chartInterface = new ChartInterfaceModel();
 
+chartInterface.minDataSetValue = 0;
 chartInterface.maxDataSetValue = 0;
 chartInterface.dataSet = new DataSetCollection();
 
@@ -43,6 +44,5 @@ chartInterface.dataSet.at(3).series = new SeriesCollection();
 chartInterface.dataSet.at(3).series.add({ id : '0', name : 'Orders', value : 60 });
 chartInterface.dataSet.at(3).series.add({ id : '1', name : 'Items', value : 900 });
 chartInterface.dataSet.at(3).series.add({ id : '2', name : 'Extra', value : 100 });
-
 
 module.exports = chartInterface;

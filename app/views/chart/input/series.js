@@ -7,6 +7,7 @@ module.exports = View.extend({
     autoRender : true,
     
     initialize : function(options){
+        this.chartInterfaceModel = options.chartInterfaceModel;
     },
     render : function(options){
         this.renderWithTemplate();
@@ -14,7 +15,12 @@ module.exports = View.extend({
         this.renderCollection(
             this.collection,
             Series_itemView,
-            this.queryByHook('series')
+            this.queryByHook('series'),
+            {
+                viewOptions : {
+                    chartInterfaceModel : this.chartInterfaceModel
+                }
+            }
         );
     }
 });

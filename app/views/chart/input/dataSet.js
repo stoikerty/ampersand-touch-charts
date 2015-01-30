@@ -11,12 +11,15 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        window.model = this.model;
-
         this.renderCollection(
             this.model.dataSet,
             DataSet_itemView,
-            this.queryByHook('dataSet')
+            this.queryByHook('dataSet'),
+            {
+                viewOptions : {
+                    chartInterfaceModel : this.model
+                }
+            }
         );
     }
 });
