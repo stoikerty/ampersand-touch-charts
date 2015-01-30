@@ -15,6 +15,8 @@ module.exports = View.extend({
 
         console.log('   - series');
 
+        window.seriesCollection = this.collection;
+
         this.renderCollection(
             this.collection,
             Series_itemView,

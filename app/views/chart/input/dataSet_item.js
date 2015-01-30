@@ -25,8 +25,8 @@ module.exports = View.extend({
         // );
 
         this.view = new SeriesView({
-            el : this.queryByHook('dataSet_item'),
-            collection : this.collection
+            el : this.queryByHook('series-container'),
+            collection : this.model.series
         });
     }
 });

@@ -20,15 +20,16 @@ module.exports = View.extend({
         
         console.log('dataSet');
 
-        this.view = new DataSet_itemView({
-            el : this.queryByHook('dataSet'),
-            collection : this.model.series
-        });
+        // render one dataSet_item for each existing data-set
+        // this.view = new DataSet_itemView({
+        //     el : this.queryByHook('dataSet'),
+        //     collection : this.collection
+        // });
 
-        // this.renderCollection(
-        //     this.model.collection,
-        //     DataSet_itemView,
-        //     this.queryByHook('dataSet')
-        // );
+        this.renderCollection(
+            this.collection,
+            DataSet_itemView,
+            this.queryByHook('dataSet')
+        );
     }
 });
