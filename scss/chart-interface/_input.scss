@@ -1,0 +1,86 @@
+@import "../_global-config.scss";
+
+.dataSet-input{
+    @include position(relative, block, 100%);
+    float : left;
+    clear : both;
+
+    $series-name-size : 120px;
+    $dataSet-width    : 100px;
+
+    ul.dataSet{
+        @include resetList;
+        @include position(relative, block, 100%);
+        float : left;
+        margin : 0;
+        padding : 0 0 0 $series-name-size;
+        white-space : nowrap;
+        overflow-y : hidden; 
+        overflow-x : scroll; 
+
+        li.dataSet_item{
+            @include position(relative, inline-block, $dataSet-width);
+            padding : 0px;
+
+            .caption{
+                @include position(relative, block, $dataSet-width - $grid);
+                float : left;
+                left  : $grid / 2;
+                min-height: 20px;
+                margin-top    : $grid;
+                margin-bottom : $grid / 2;
+                padding : 2px;
+
+                font-size : 13px;
+                color : #fff;
+                text-align : center;
+
+                @include proto(3);
+            }
+
+            .series-container{
+                @include position(relative, block);
+                float : left;
+
+                ul.series{
+                    @include resetList;
+                    @include position(relative, block, 100%);
+                    float : left;
+                    margin : 0;
+                    padding : 0;
+
+                    li.series_item{
+                        @include position(relative, block, 100%);
+                        float : left;
+                        margin-bottom : $grid;
+
+                        .name{
+                            // don't display the name of the series
+                            // for all series items
+                            display: none;
+                        }
+
+                        .value{
+                            @include position(relative, block, 100%);
+                            float : left;
+                        }
+                    }
+                }
+            }
+
+            // only display the series name once
+            &:first-child .series-container
+              .series:first-child .series_item .name{
+                @include position(absolute, block, $series-name-size - $grid);
+                float : left;
+                min-height: 20px;
+                @include proto(4);
+                left : -$series-name-size;
+
+                padding : 2px 4px 0;
+                color : #fff;
+                text-align : right;
+            }
+        }
+    }
+}

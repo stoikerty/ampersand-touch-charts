@@ -1,0 +1,45 @@
+@import "_global-config.scss";
+
+.chart-interface{
+    @include position(relative, block, 100%);
+    padding : 10px $grid;
+    margin : 0 auto;
+    max-width : 800px;
+
+    .input{
+        @include position(relative, block, 100%);
+        float : left;
+        clear : both;
+        min-height : 30px;
+        margin-bottom : $grid * 2;
+        background-color : $green;
+        &:before{
+            @include position(absolute, block);
+            top : 0;
+            left : 0;
+            padding : 3px;
+            content : 'chart-input';
+            color : #333;
+            background-color : rgba(#fff, 0.5);
+        }
+    }
+    .output{
+        @include position(relative, block, 100%);
+        float : left;
+        clear : both;
+        min-height : 30px;
+        @include proto($yellow);
+        &:before{
+            @include position(absolute, block);
+            top : 0;
+            left : 0;
+            padding : 3px;
+            content : 'chart-output';
+            color : #333;
+            background-color : rgba(#fff, 0.5);
+        }
+    }
+}
+
+@import "chart-interface/input";
+@import "chart-interface/output";

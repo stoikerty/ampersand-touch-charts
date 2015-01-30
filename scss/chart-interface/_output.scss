@@ -1,0 +1,57 @@
+@import "../_global-config.scss";
+
+.dataSet-output{
+    @include position(relative, block, 100%);
+    float : left;
+    clear : both;
+
+    ul.dataSet{
+        @include resetList;
+        margin : 0;
+
+        li.dataSet_item{
+
+            .caption{
+                font-size : 13px;
+                color : #fff;
+                text-align : center;
+
+                @include proto(3);
+            }
+
+            .series-container{
+
+                ul.series{
+                    @include resetList;
+                    margin : 0;
+
+                    li.series_item{
+
+                        .name{
+                            // don't display the name of the series
+                            // for all series items
+                            display: none;
+                        }
+
+                        .value{
+                        }
+                    }
+                }
+            }
+
+            // only display the series name once
+            &:first-child .series-container
+              .series:first-child .series_item .name{
+                @include position(absolute, block);
+                top   : 0;
+                right : 0;
+                min-height: 20px;
+                @include proto(4);
+
+                padding : 2px 4px 0;
+                color : #fff;
+                text-align : right;
+            }
+        }
+    }
+}
