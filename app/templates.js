@@ -43,17 +43,27 @@
 
     // chart\interface.jade compiled template
     templatizer["chart"]["interface"] = function tmpl_chart_interface() {
-        return '<div class="chart-interface"><div class="input"><div data-hook="input-container" class="input-container"></div></div><div data-hook="output" class="output"></div></div>';
+        return '<div class="chart-interface"><div class="input"><div data-hook="input-container" class="input-container"></div></div><div class="output"><div data-hook="output-container" class="output-container"></div></div></div>';
     };
 
     // chart\output\dataSet.jade compiled template
     templatizer["chart"]["output"]["dataSet"] = function tmpl_chart_output_dataSet() {
-        return '<ul class="data-set"><div placeholder="" maxlength="100" class="item"></div></ul>';
+        return '<div class="dataSet-container"><ul data-hook="dataSet" class="dataSet"></ul></div>';
+    };
+
+    // chart\output\dataSet_item.jade compiled template
+    templatizer["chart"]["output"]["dataSet_item"] = function tmpl_chart_output_dataSet_item() {
+        return '<li class="dataSet_item"><div data-hook="caption" class="caption"></div><div data-hook="series-container" class="series-container"></div></li>';
     };
 
     // chart\output\series.jade compiled template
     templatizer["chart"]["output"]["series"] = function tmpl_chart_output_series() {
-        return '<ul class="series"><div placeholder="" maxlength="100" class="item"></div></ul>';
+        return '<div class="series-container"><ul data-hook="series" class="series"></ul></div>';
+    };
+
+    // chart\output\series_item.jade compiled template
+    templatizer["chart"]["output"]["series_item"] = function tmpl_chart_output_series_item() {
+        return '<li class="series_item"><div data-hook="name" class="name"></div><input data-hook="value" class="value"/></li>';
     };
 
     return templatizer;
