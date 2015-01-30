@@ -10,28 +10,23 @@ body{
 
 .chart-interface{
     @include position(relative, block, 100%);
-    float : left;
-    padding : 10px;
-    @include proto($blue);
+    padding : 10px 0;
+    margin : 0 auto;
+    max-width : 800px;
 
     .input{
         @include position(relative, block, 100%);
         float : left;
         min-height : 30px;
         padding : 4px;
-        @include proto($green);
-        &:before{ content : 'chart-input'; color : #fff; }
-
-        .series-item .label{
-            @include opacity(0.5);
-        }
+        background-color : $green;
     }
     .output{
         @include position(relative, block, 100%);
         float : left;
         min-height : 30px;
         padding : 4px;
-        @include proto($orange);
+        @include proto($yellow);
         &:before{ content : 'chart-output'; color : #fff; }
     }
 }
@@ -65,14 +60,12 @@ body{
                 left  : 10%;
                 min-height: 20px;
                 margin-bottom : $grid;
-                @include proto(3);
+                padding : 2px;
+                color : #fff;
 
-                &:before{
-                    @include position(absolute, block);
-                    content : 'caption';
-                    margin : 2px;
-                    color : #fff;
-                }
+                text-align : center;
+
+                @include proto(3);
             }
 
             .series-container{
@@ -111,15 +104,12 @@ body{
                 @include position(absolute, block, $series-name-size - $grid);
                 float : left;
                 min-height: 20px;
-                @include proto(2);
+                @include proto(4);
                 left : -$series-name-size;
 
-                &:before{
-                    @include position(absolute, block);
-                    content : 'series name';
-                    margin : 2px;
-                    color : #fff;
-                }
+                padding : 2px 4px 0;
+                color : #fff;
+                text-align : right;
             }
         }
     }

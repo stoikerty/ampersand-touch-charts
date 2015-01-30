@@ -14,7 +14,7 @@ module.exports = View.extend({
 
         console.log('outputting interface + some css');
 
-        this.inputEl = this.queryByHook("input");
+        this.inputEl = this.queryByHook("input-container");
         this.outputEl = this.queryByHook("output");
 
         console.log(this.inputEl);

@@ -43,7 +43,7 @@
 
     // chart\interface.jade compiled template
     templatizer["chart"]["interface"] = function tmpl_chart_interface() {
-        return '<div class="chart-interface"><div data-hook="input" class="input"></div><div data-hook="output" class="output"></div></div>';
+        return '<div class="chart-interface"><div class="input"><div data-hook="input-container" class="input-container"></div></div><div data-hook="output" class="output"></div></div>';
     };
 
     // chart\output\dataSet.jade compiled template
