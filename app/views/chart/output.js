@@ -1,6 +1,6 @@
 var View = require('ampersand-view');
 var templates = require('../../templates');
-var DataSetView = require('./input/dataSet');
+var DataSetView = require('./output/dataSet');
 
 module.exports = View.extend({
     template : '<div class="output-container" data-hook="output-container"></div>',

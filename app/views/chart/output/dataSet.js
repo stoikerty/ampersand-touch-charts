@@ -3,7 +3,7 @@ var templates = require('../../../templates');
 var DataSet_itemView = require('./dataSet_item');
 
 module.exports = View.extend({
-    template : templates.chart.input.dataSet,
+    template : templates.chart.output.dataSet,
     autoRender : true,
 
     initialize : function(){

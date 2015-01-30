@@ -3,7 +3,7 @@ var templates = require('../../../templates');
 var Series_itemView = require('./series_item');
 
 module.exports = View.extend({
-    template : templates.chart.input.series,
+    template : templates.chart.output.series,
     autoRender : true,
     
     initialize : function(options){

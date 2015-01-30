@@ -23,7 +23,7 @@
 
     // chart\input\dataSet.jade compiled template
     templatizer["chart"]["input"]["dataSet"] = function tmpl_chart_input_dataSet() {
-        return '<div class="dataSet-container"><ul data-hook="dataSet" class="dataSet"></ul></div>';
+        return '<div class="dataSet-input"><ul data-hook="dataSet" class="dataSet"></ul></div>';
     };
 
     // chart\input\dataSet_item.jade compiled template
@@ -48,7 +48,7 @@
 
     // chart\output\dataSet.jade compiled template
     templatizer["chart"]["output"]["dataSet"] = function tmpl_chart_output_dataSet() {
-        return '<div class="dataSet-container"><ul data-hook="dataSet" class="dataSet"></ul></div>';
+        return '<div class="dataSet-output"><ul data-hook="dataSet" class="dataSet"></ul></div>';
     };
 
     // chart\output\dataSet_item.jade compiled template
