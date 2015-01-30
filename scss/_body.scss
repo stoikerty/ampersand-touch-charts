@@ -1,6 +1,4 @@
-@import "compass/css3/box-sizing";
-@import "compass/css3/box-shadow";
-@import "compass/utilities/general/clearfix";
+@import "_global-config.scss";
 
 body {
 	position  : relative;
@@ -22,4 +20,6 @@ body {
 	/* simple clearfix to contain all elements */
 	//overflow: hidden;
 	content: " ";
+
+    @include scrollbar;
 }

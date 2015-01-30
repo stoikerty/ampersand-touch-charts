@@ -48,7 +48,7 @@
 
     // chart\output\dataSet.jade compiled template
     templatizer["chart"]["output"]["dataSet"] = function tmpl_chart_output_dataSet() {
-        return '<div class="dataSet-output"><ul data-hook="dataSet" class="dataSet"></ul></div>';
+        return '<div class="dataSet-output"><div class="scale"><div class="numbers"><div data-hook="scale-number scale-number-max" class="number max"></div><div data-hook="scale-number" class="number"></div><div data-hook="scale-number" class="number"></div><div data-hook="scale-number" class="number"></div><div data-hook="scale-number" class="number"></div><div data-hook="scale-number" class="number"></div><div data-hook="scale-number scale-number-min" class="number min"></div><div data-hook="scale-number" class="number"></div></div></div><ul data-hook="dataSet" class="dataSet"></ul></div>';
     };
 
     // chart\output\dataSet_item.jade compiled template

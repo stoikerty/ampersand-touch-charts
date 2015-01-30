@@ -13,14 +13,18 @@ module.exports = View.extend({
         }
     },
     
-    initialize : function(){
+    initialize : function(options){
+        this.chartInterfaceModel = options.chartInterfaceModel;
     },
     render : function(options){
+        //if (options && !options.renderTemplate) this.renderWithTemplate();
         this.renderWithTemplate();
 
         this.view = new SeriesView({
             el : this.queryByHook('series-container'),
-            collection : this.model.series
+            collection : this.model.series,
+            chartInterfaceModel : this.chartInterfaceModel//,
+            //options : options
         });
     }
 });

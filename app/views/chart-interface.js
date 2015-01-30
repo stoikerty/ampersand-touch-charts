@@ -4,7 +4,7 @@ var InputView = require('./chart/input');
 var OutputView = require('./chart/output');
 
 // import sample-data for project
-chartInterfaceData = require('../_sample-data/chartInterface');
+chartInterfaceModel = require('../_sample-data/chartInterface');
 
 module.exports = View.extend({
     template : templates.chart.interface,
@@ -20,12 +20,12 @@ module.exports = View.extend({
         // create the interface view
         this.view = new InputView({
             el : this.queryByHook("input-container"),
-            model : chartInterfaceData
+            model : chartInterfaceModel
         });
 
         this.view = new OutputView({
             el : this.queryByHook("output-container"),
-            model : chartInterfaceData
+            model : chartInterfaceModel
         });
     }
 });

@@ -13,7 +13,7 @@
         padding : 0 0 0 $series-name-size;
         white-space : nowrap;
         overflow-y : hidden; 
-        overflow-x : scroll; 
+        overflow-x : scroll;
 
         li.dataSet_item{
             @include position(relative, inline-block, $dataSet_item-width);

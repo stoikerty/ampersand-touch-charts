@@ -24,29 +24,41 @@ module.exports = View.extend({
     initialize : function(options){
         this.chartInterfaceModel = options.chartInterfaceModel;
         // console.log(options);
+
+        // catch the changes on the model
+        this.listenTo(this.model, 'change:value', this.valueChanged);
+        this.valueChanged();
     },
     render : function(options){
         this.renderWithTemplate();
 
-
-        // catch the topmost parent model through options object
-        // log it to make sure it's working
-        console.log(this.chartInterfaceModel.minDataSetValue);
-        // see if we can catch the changes on the model
-        this.listenTo(this.model, 'change:value', this.changed);
-
-
         this.valueEl = this.queryByHook('value');
     },
 
-    // 'save' point.
-    changed: function () {
-        console.log('model changed');
+    valueChanged: function () {
+        // NOTE: not sure why this is triggered 4 times on a single change
 
-        // now we can check for a min and max value
-        // and save it to the parent model
-        this.chartInterfaceModel.minDataSetValue = this.model.value;
-        console.log(this.chartInterfaceModel.minDataSetValue);
+        // set our limit
+        // (to be placed into changeValue as well)
+        var smallestAllowed = -1000000000;
+        var largestAllowed = 1000000000;
+
+        // start with big number for reduction later
+        var minValue = largestAllowed;
+        // start with small number to be increased later
+        var maxValue = smallestAllowed;
+
+        // find the smallest and largest value
+        this.chartInterfaceModel.dataSet.forEach(function(model){
+            model.series.forEach(function(series_item){
+                maxValue = Math.max(maxValue, series_item.value);
+                minValue = Math.min(minValue, series_item.value);
+            });
+        });
+
+        // save it
+        this.chartInterfaceModel.minDataSetValue = minValue;
+        this.chartInterfaceModel.maxDataSetValue = maxValue;
     },
 
     // save the new Value to the model

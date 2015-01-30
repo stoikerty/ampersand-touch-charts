@@ -4,10 +4,24 @@
     @include position(relative, block, 100%);
     float : left;
     clear : both;
+    background-color : #fff;
+    @include box-shadow(0px 0px 3px rgba(#000, 0.2));
+    padding-top : $grid;
+    padding-bottom : $grid;
+
+    .numbers{
+        @include position(absolute, block);
+        top : 30px;
+        left : 10px;
+        padding : $grid / 2;
+        @include proto($blue);
+        color : #fff;
+    }
 
     $dataSet-height : 300px;
 
     ul.dataSet{
+        z-index : 1;
         @include position(relative, block, 100%, $dataSet-height);
         float : left;
         clear : both;
@@ -20,27 +34,42 @@
             @include position(relative, block, $dataSet_item-width, $dataSet-height);
             float : left;
 
+            $chart-border-color : #bbb;
+
             .caption{
+                z-index : 2;
                 @include position(absolute, block, 100%, 20px);
                 bottom : 0;
+                left : 0;
 
                 font-size : 13px;
                 line-height: 20px;
-                color : #fff;
+                color : #777;
                 text-align : center;
 
-                @include proto(3);
+                background-color : #fff;
+
+                &:after{
+                    @include position(absolute, block, 100%, 50%);
+                    top  : 0;
+                    left : 0;
+                    content : ' ';
+                    border-left : 1px solid $chart-border-color;
+                    border-top : 1px solid $chart-border-color;
+                    border-right : 1px solid $chart-border-color;
+                }
             }
 
             .series-container{
+                z-index : 1;
                 @include position(absolute, block, 100%, 100%);
                 top : 0;
                 left : 0;
 
                 ul.series{
                     @include resetList;
-                    @include position(absolute, block, 100%, 100%);
-                    top : 0;
+                    @include position(absolute, block, 100%, 90%);
+                    bottom : 0;
                     left : 0;
                     margin : 0;
                     padding : 0 15% 20px 15%;
@@ -48,8 +77,6 @@
                     li.series_item{
                         @include position(relative, block, 50%, 100%);
                         float : left;
-                        @include proto(5);
-                        @include box-shadow(inset 0px 0px 4px rgba(#000, 0.2));
 
                         .name{
                             // don't display the name of the series
@@ -58,12 +85,53 @@
                         }
 
                         .value{
+                            @include isAnimated;
+                            @include position(absolute, block, 100%, 100%);
+                            bottom : 0;
                             text-align : center;
                             font-size  : 10px;
                             color : rgba(#fff, 0.8);
+
+                            @include transition(
+                                height $ease-in-out-quint 0.7s 0.2s
+                            );
+
+                            @include proto(5);
+                            @include box-shadow(
+                                2px 2px 2px 0px rgba(#000, 0.08)
+                            );
+                            @include border-radius(20px 1px 0px 0px, 6px 3px 0px 0px);
+
+                            border-top  : 1px solid #000;
+                            border-left : 1px solid #000;
+                        }
+
+                        &:nth-child(1) .value{
+                            border-color : $red-light;
+                            background-color : $red;
+                        }
+                        &:nth-child(2) .value{
+                            border-color : $blue-light;
+                            background-color : $blue;
+                        }
+                        &:nth-child(3) .value{
+                            border-color : $green-light;
+                            background-color : $green;
+                        }
+                        &:nth-child(4) .value{
+                            border-color : $orange-light;
+                            background-color : $orange;
                         }
                     }
                 }
+            }
+
+            &:first-child .series-container:after{
+                @include position(absolute, block, 100%, 100%);
+                bottom  : 0;
+                left : 0;
+                content : ' ';
+                border-left : 1px solid $chart-border-color;
             }
 
             // only display the series name once
