@@ -1,4 +1,4 @@
-@import "_global-config.scss";
+@import "config";
 
 .chart-interface{
     @include position(relative, block, 100%);

@@ -1,18 +1,31 @@
-@import "../_global-config.scss";
+@import "config";
 
 .dataSet-output{
     @include position(relative, block, 100%);
     float : left;
     clear : both;
 
+    $dataSet-height : 300px;
+
     ul.dataSet{
+        @include position(relative, block, 100%, $dataSet-height);
+        float : left;
+        clear : both;
+        padding-left : $series-name-size;
+
         @include resetList;
         margin : 0;
 
         li.dataSet_item{
+            @include position(relative, block, $dataSet_item-width, $dataSet-height);
+            float : left;
 
             .caption{
+                @include position(absolute, block, 100%, 20px);
+                bottom : 0;
+
                 font-size : 13px;
+                line-height: 20px;
                 color : #fff;
                 text-align : center;
 
@@ -20,12 +33,23 @@
             }
 
             .series-container{
+                @include position(absolute, block, 100%, 100%);
+                top : 0;
+                left : 0;
 
                 ul.series{
                     @include resetList;
+                    @include position(absolute, block, 100%, 100%);
+                    top : 0;
+                    left : 0;
                     margin : 0;
+                    padding : 0 15% 20px 15%;
 
                     li.series_item{
+                        @include position(relative, block, 50%, 100%);
+                        float : left;
+                        @include proto(5);
+                        @include box-shadow(inset 0px 0px 4px rgba(#000, 0.2));
 
                         .name{
                             // don't display the name of the series
@@ -34,6 +58,9 @@
                         }
 
                         .value{
+                            text-align : center;
+                            font-size  : 10px;
+                            color : rgba(#fff, 0.8);
                         }
                     }
                 }
@@ -42,7 +69,7 @@
             // only display the series name once
             &:first-child .series-container
               .series:first-child .series_item .name{
-                @include position(absolute, block);
+                @include position(absolute, none);
                 top   : 0;
                 right : 0;
                 min-height: 20px;

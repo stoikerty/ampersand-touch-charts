@@ -20,5 +20,8 @@ module.exports = View.extend({
     },
     render : function(options){
         this.renderWithTemplate();
+
+        // fit every element of the collection into the series-chart
+        this.el.style.width  = (100 / this.parent.collection.length) + '%';
     }
 });

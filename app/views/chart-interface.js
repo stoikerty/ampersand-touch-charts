@@ -15,6 +15,7 @@ dataSetCollection.add({
 dataSetCollection.at(0).series = new SeriesCollection();
 dataSetCollection.at(0).series.add({ id : '0', name : 'Orders', value : 50 });
 dataSetCollection.at(0).series.add({ id : '1', name : 'Items', value : 700 });
+dataSetCollection.at(0).series.add({ id : '2', name : 'Extra', value : 400 });
 
 dataSetCollection.add({
     id : '1',
@@ -23,6 +24,7 @@ dataSetCollection.add({
 dataSetCollection.at(1).series = new SeriesCollection();
 dataSetCollection.at(1).series.add({ id : '0', name : 'Orders', value : 30 });
 dataSetCollection.at(1).series.add({ id : '1', name : 'Items', value : 500 });
+dataSetCollection.at(1).series.add({ id : '2', name : 'Extra', value : 300 });
 
 dataSetCollection.add({
     id : '2',
@@ -31,14 +33,16 @@ dataSetCollection.add({
 dataSetCollection.at(2).series = new SeriesCollection();
 dataSetCollection.at(2).series.add({ id : '0', name : 'Orders', value : 40 });
 dataSetCollection.at(2).series.add({ id : '1', name : 'Items', value : 600 });
+dataSetCollection.at(2).series.add({ id : '2', name : 'Extra', value : 200 });
 
 dataSetCollection.add({
     id : '3',
     caption : '6 inch lustre'
 });
 dataSetCollection.at(3).series = new SeriesCollection();
-dataSetCollection.at(3).series.add({ id : '0', label : 'Orders', value : 60 });
-dataSetCollection.at(3).series.add({ id : '1', label : 'Items', value : 900 });
+dataSetCollection.at(3).series.add({ id : '0', name : 'Orders', value : 60 });
+dataSetCollection.at(3).series.add({ id : '1', name : 'Items', value : 900 });
+dataSetCollection.at(3).series.add({ id : '2', name : 'Extra', value : 100 });
 
 
 module.exports = View.extend({

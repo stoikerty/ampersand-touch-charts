@@ -1,12 +1,9 @@
-@import "../_global-config.scss";
+@import "config";
 
 .dataSet-input{
     @include position(relative, block, 100%);
     float : left;
     clear : both;
-
-    $series-name-size : 120px;
-    $dataSet-width    : 100px;
 
     ul.dataSet{
         @include resetList;
@@ -19,11 +16,11 @@
         overflow-x : scroll; 
 
         li.dataSet_item{
-            @include position(relative, inline-block, $dataSet-width);
+            @include position(relative, inline-block, $dataSet_item-width);
             padding : 0px;
 
             .caption{
-                @include position(relative, block, $dataSet-width - $grid);
+                @include position(relative, block, $dataSet_item-width - $grid);
                 float : left;
                 left  : $grid / 2;
                 min-height: 20px;
