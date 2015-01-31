@@ -70,7 +70,7 @@ module.exports = View.extend({
             // update with a sensibly rounded number
             var roundedNumber = this.round(((maxNumber) * percentage), 0);
             if (roundedNumber > 100) roundedNumber = this.round((roundedNumber / 10), 0) * 10;
-            if (roundedNumber > 1000) roundedNumber = this.round((roundedNumber / 100), 0) * 100;
+            //if (roundedNumber > 1000) roundedNumber = this.round((roundedNumber / 100), 0) * 100;
             this.animateUpdatedElement(this.allNumberElements[selected], roundedNumber);
 
             // set it into the correct position

@@ -25,8 +25,12 @@ module.exports = View.extend({
         this.valueEl = this.valueEl || this.el;
 
         // transform the bar-height to the approriate % value
-        this.valueEl.style.height = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
-    
+        if (this.chartInterfaceModel.maxDataSetValue == 0){
+            this.valueEl.style.height = 0;
+        } else {
+            this.valueEl.style.height = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
+        }
+
         // fit every element of the collection into the series-chart
         this.el.style.width = (100 / this.collection.length) + '%';
     },
