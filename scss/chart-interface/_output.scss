@@ -1,50 +1,83 @@
 @import "config";
 
+.output{
+    @include position(relative, block, 100%);
+    float : left;
+    clear : both;
+    min-height : 30px;
+    background-color : #fff;
+    @include box-shadow(
+        0px 0px 2px rgba(#000, 0.14)
+    );
+}
+
 .dataSet-output{
     @include position(relative, block, 100%);
     float : left;
     clear : both;
-    background-color : #fff;
-    @include box-shadow(0px 0px 3px rgba(#000, 0.2));
+    overflow : hidden;
+    overflow-y : hidden; 
+    overflow-x : scroll;
+    padding : ($grid * 1.5) 0;
 
     $dataSet-height : 300px;
     $caption-height : 20px;
     $chart-text-color   : #777;
-    $chart-border-color : #bbb;
+    $chart-border-color : #999;
+
+    $number-area-size : $series-name-size;
 
     .numbers{
         z-index : 1;
-        @include position(absolute, block, $series-name-size, $dataSet-height - ($caption-height * 1.5));
+        @include position(absolute, block, 100%, $dataSet-height - ($caption-height * 1.5));
         top   : $caption-height;
         left  : 0px;
         color : #fff;
+        overflow : hidden;
 
         .number{
             @include isAnimated;
-            @include position(absolute, block, auto, 20px);
+            @include position(absolute, block, 100%, 20px);
             top     : 0;
-            right   : 0px;
-            padding : 0 ($grid * 1.7);
+            left    : 0px;
+            padding : 0;
 
             color : $chart-text-color;
             font-size   : 13px;
             line-height : 20px;
+            text-align  : right;
 
-            &:after{
+            &:before{
                 @include position(absolute, block, $grid, 50%);
-                top  : 50%;
-                right : 0;
+                top   : 50%;
+                left  : $number-area-size - $grid;
                 content : ' ';
                 //border-left : 1px solid $chart-border-color;
                 border-top : 1px solid $chart-border-color;
                 //border-right : 1px solid $chart-border-color;
             }
 
+            &:after{
+                @include position(absolute, block, 2000px, 50%);
+                top  : 50%;
+                left : $number-area-size;
+                content : ' ';
+                //border-left : 1px solid $chart-border-color;
+                border-top : 1px solid lighten($chart-border-color, 24%);
+                //border-right : 1px solid $chart-border-color;
+            }
+
+            &.min:after{
+                border-color : $chart-border-color;
+            }
+
             .value{
+                width : $number-area-size;
+                padding-right : ($grid * 1.7);
                 @include transform-origin(100%, 50%);
                 @include transform(translateX(0px) translateY(0px));
                 @include transition(
-                    opacity ease-out 0.26s,
+                    opacity ease-out 0.25s 0.05s,
                     transform ease-out 0.3s
                 );
 
@@ -65,14 +98,15 @@
         @include position(relative, block, 100%, $dataSet-height);
         float : left;
         clear : both;
-        padding-left : $series-name-size;
+        padding-left : $number-area-size;
 
         @include resetList;
         margin : 0;
 
+        white-space : nowrap;
+
         li.dataSet_item{
-            @include position(relative, block, $dataSet_item-width, $dataSet-height);
-            float : left;
+            @include position(relative, inline-block, $dataSet_item-width, $dataSet-height);
 
             .caption{
                 z-index : 2;
@@ -110,7 +144,7 @@
                     bottom : 0;
                     left : 0;
                     margin : 0;
-                    padding : ($caption-height + 6px) 15% $caption-height 15%;
+                    padding : ($grid * 1.4) 15% $caption-height 15%;
 
                     li.series_item{
                         @include position(relative, block, 50%, 100%);
@@ -138,7 +172,7 @@
                             @include box-shadow(
                                 2px 2px 2px 0px rgba(#000, 0.08)
                             );
-                            @include border-radius(20px 1px 0px 0px, 6px 3px 0px 0px);
+                            @include border-radius(16px 2px 0px 0px, 3px 3px 0px 0px);
 
                             border-top  : 1px solid #000;
                             border-left : 1px solid #000;
