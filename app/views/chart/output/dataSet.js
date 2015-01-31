@@ -20,6 +20,10 @@ module.exports = View.extend({
         }
     },
 
+    // ---
+    // Utilities
+    // ---
+
     round : function(x, digits){
         return parseFloat(x.toFixed(digits));
     },
@@ -43,8 +47,11 @@ module.exports = View.extend({
                 element.childNodes[0].classList.remove('updated');
             }, 200);
         }
-        window.currentEl = element;
     },
+
+    // ---
+    // Adapt the number-scale to use the right numbers
+    // ---
 
     // update all items to use the correct height
     // by triggering a change on their model
@@ -52,6 +59,7 @@ module.exports = View.extend({
         this.model.dataSet.forEach(function(model){
             model.series.forEach(function(series_item){
                 series_item.trigger('change');
+                series_item.trigger('maxValueChanged');
             });
         });
     },
@@ -65,16 +73,16 @@ module.exports = View.extend({
         for (i = 0; i < this.allNumberElements.length; i++){
             var selected = this.allNumberElements.length - (i + 1);
             var maxNumber = this.model.maxDataSetValue;
-            var percentage = ((i+1) / (this.allNumberElements.length));
+            var percentage = ((i+1) / this.allNumberElements.length);
 
             // update with a sensibly rounded number
-            var roundedNumber = this.round(((maxNumber) * percentage), 0);
+            var roundedNumber = this.round((maxNumber * percentage), 0);
             if (roundedNumber > 100) roundedNumber = this.round((roundedNumber / 10), 0) * 10;
             
             this.animateUpdatedElement(this.allNumberElements[selected], roundedNumber);
 
             // set it into the correct position
-            percentage = ((i) / (this.allNumberElements.length));
+            percentage = (i / this.allNumberElements.length);
             var pixelPercentage = this.round((parentContainerHeight * percentage), 0);
             this.translate(this.allNumberElements[i], 0, pixelPercentage);
         }
@@ -83,6 +91,8 @@ module.exports = View.extend({
         this.animateUpdatedElement(this.nullNumberElement, 0);
         this.translate(this.nullNumberElement, 0, parentContainerHeight);
     },
+
+    // ---
 
     initialize : function(){
     },

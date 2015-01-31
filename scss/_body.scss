@@ -22,4 +22,11 @@ body {
 	content: " ";
 
     @include scrollbar;
+
+    &.disable-selection{
+        // disable user selection and webkit highlight on tap
+        @include user-select(none);
+        -ms-user-select : none;
+        -webkit-tap-highlight-color : transparent;
+    }
 }

@@ -178,46 +178,81 @@
                             border-top  : 1px solid rgba(#eee, 0.4);
                             border-left : 1px solid rgba(#eee, 0.4);
 
+                            &.is-touched{
+                                @include transition(none);
+                            }
+
                             .handle{
                                 z-index : 3;
+                                @include isButton;
+                                @include isAnimated;
                                 @include position(absolute, block, 90%, 12px);
                                 top  : -16px;
-                                left : 5%;
-                                float : left;
+                                left : 4%;
                                 background-color : #fafafa;
                                 border        : 1px solid rgba(#000, 0.06);
                                 border-left   : 1px solid rgba(#000, 0.08);
                                 border-right  : 1px solid rgba(#000, 0.24);
                                 border-bottom : 1px solid rgba(#000, 0.24);
-                                //@include opacity(0.9);
 
-                                &:after{
-                                    @include position(absolute, block, auto, 24px);
+                                @include transition(
+                                    background-color ease-in-out 0.1s
+                                );
+
+                                .handle-value{
+                                    @include isAnimated;
+                                    @include transform-origin(100%, 50%);
+                                    @include position(absolute, block, auto, 27px);
                                     min-width : 60px;
-                                    top : -10px;
+                                    top : -9px;
                                     right : 100%;
-                                    margin-right : 14px;
+                                    margin-right : 16px;
                                     padding : 0 8px;
 
-                                    background-color : rgba(#fff, 0.92);
+                                    background-color : rgba(#fff, 0.96);
                                     border        : 2px solid rgba(#000, 0.06);
                                     border-left   : 2px solid rgba(#000, 0.09);
-                                    border-right  : 2px solid rgba(#000, 0.18);
-                                    border-bottom : 2px solid rgba(#000, 0.24);
+                                    border-right  : 2px solid rgba(#000, 0.22);
+                                    border-bottom : 2px solid rgba(#000, 0.28);
 
-                                    content : 'value';
                                     color : #777;
-                                    font-size   : 18px;
-                                    line-height : 23px;
+                                    font-size   : 16px;
+                                    line-height : 24px;
 
+                                    @include transform(translateX(30px) scale(0.5));
                                     @include opacity(0);
+                                    visibility : hidden;
+                                    @include transition(
+                                        opacity $ease-in-quart 0.2s,
+                                        transform $ease-in-out-quart 0.24s,
+                                        visibility linear 0s 0.24s
+                                    );
                                 }
-                            }
 
-                            &.is-touched{
-                                .handle{
-                                    &:after{
+                                &.is-touched{
+                                    background-color : #bbb;
+
+                                    .handle-value{
+                                        @include transform(translateX(0px) scale(1));
                                         @include opacity(1);
+                                        visibility : visible;
+                                        @include transition(
+                                            opacity $ease-in-out-quart 0.24s,
+                                            transform $ease-in-out-quart 0.24s,
+                                            visibility linear 0s 0s
+                                        );
+                                    }
+                                }
+
+                                &.is-moving-up{
+                                    .handle-value{
+                                        @include transform(translateX(0px) rotateZ(-2deg));
+                                    }
+                                }
+
+                                &.is-moving-down{
+                                    .handle-value{
+                                        @include transform(translateX(0px) rotateZ(2deg));
                                     }
                                 }
                             }

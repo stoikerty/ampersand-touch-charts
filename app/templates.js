@@ -63,7 +63,7 @@
 
     // chart\output\series_item.jade compiled template
     templatizer["chart"]["output"]["series_item"] = function tmpl_chart_output_series_item() {
-        return '<li class="series_item"><div data-hook="name" class="name"></div><div data-hook="value" class="value"><div data-hook="handle" class="handle"></div></div></li>';
+        return '<li class="series_item"><div data-hook="name" class="name"></div><div data-hook="value" class="value"><div data-hook="handle" class="handle"><div data-hook="handle-value" class="handle-value"></div></div></div></li>';
     };
 
     return templatizer;
