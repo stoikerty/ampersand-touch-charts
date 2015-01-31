@@ -9,30 +9,42 @@
 
     $dataSet-height : 300px;
     $caption-height : 20px;
+    $chart-text-color   : #777;
+    $chart-border-color : #bbb;
 
     .numbers{
+        z-index : 1;
         @include position(absolute, block, $series-name-size, $dataSet-height - ($caption-height * 1.5));
         top   : $caption-height;
         left  : 0px;
         color : #fff;
-        background-color : rgba($blue, 0.2);
 
         .number{
             @include position(absolute, block, auto, 20px);
             top     : 0;
             right   : 0px;
-            padding : 0 ($grid);
-            //padding-bottom : $grid + 1px;
-            color : #999;
+            padding : 0 ($grid * 1.7);
+
+            color : $chart-text-color;
+            font-size   : 13px;
             line-height : 20px;
-            background-color : rgba(#999, 0.1);
 
             @include transform(translateY(0px));
+
+            &:after{
+                @include position(absolute, block, $grid, 50%);
+                top  : 50%;
+                right : 0;
+                content : ' ';
+                //border-left : 1px solid $chart-border-color;
+                border-top : 1px solid $chart-border-color;
+                //border-right : 1px solid $chart-border-color;
+            }
         }
     }
 
     ul.dataSet{
-        z-index : 1;
+        z-index : 2;
         @include position(relative, block, 100%, $dataSet-height);
         float : left;
         clear : both;
@@ -45,8 +57,6 @@
             @include position(relative, block, $dataSet_item-width, $dataSet-height);
             float : left;
 
-            $chart-border-color : #bbb;
-
             .caption{
                 z-index : 2;
                 @include position(absolute, block, 100%, 20px);
@@ -55,7 +65,7 @@
 
                 font-size : 13px;
                 line-height: 20px;
-                color : #777;
+                color : $chart-text-color;
                 text-align : center;
 
                 background-color : #fff;
