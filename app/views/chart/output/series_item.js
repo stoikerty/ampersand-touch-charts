@@ -15,15 +15,20 @@ module.exports = View.extend({
             type: function (el, value, previousValue) {
                 // when the model changes, don't re-render,
                 // only change the height for the element
-                this.updateInputHeight(el);
+                this.updateStyle(el);
             },
             hook: 'value'
         }
     },
 
-    updateInputHeight : function(el){
+    updateStyle : function(el){
         this.valueEl = this.valueEl || this.el;
+
+        // transform the bar-height to the approriate % value
         this.valueEl.style.height = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
+    
+        // fit every element of the collection into the series-chart
+        this.el.style.width = (100 / this.collection.length) + '%';
     },
 
     initialize : function(options){
@@ -31,7 +36,7 @@ module.exports = View.extend({
 
         var self = this;
         self.model.on('change', function () {
-            self.updateInputHeight();
+            self.updateStyle();
         });
     },
     render : function(options){
@@ -40,10 +45,7 @@ module.exports = View.extend({
         // caching element
         this.valueEl = this.queryByHook('value');
 
-        // start by correctly rendering all values on the first run
-        this.updateInputHeight();
-
-        // fit every element of the collection into the series-chart
-        this.el.style.width = (100 / this.collection.length) + '%';
+        // update the element style
+        this.updateStyle();
     }
 });
