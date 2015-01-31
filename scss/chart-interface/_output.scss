@@ -6,16 +6,25 @@
     clear : both;
     background-color : #fff;
     @include box-shadow(0px 0px 3px rgba(#000, 0.2));
-    padding-top : $grid;
-    padding-bottom : $grid;
 
     .numbers{
-        @include position(absolute, block);
-        top : 30px;
-        left : 10px;
-        padding : $grid / 2;
-        @include proto($blue);
+        @include position(absolute, block, $series-name-size, 100%);
+        left : 0px;
         color : #fff;
+        background-color : rgba($blue, 0.2);
+
+        .number{
+            @include position(absolute, block, auto, 20px);
+            bottom : 0px;
+            right : 0px;
+            padding : 0 ($grid * 2);
+            //padding-bottom : $grid + 1px;
+            color : #999;
+            line-height : 20px;
+            background-color : rgba(#fff, 0.1);
+
+            @include transform(translateY(0px));
+        }
     }
 
     $dataSet-height : 300px;

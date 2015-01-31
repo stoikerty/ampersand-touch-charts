@@ -24,6 +24,14 @@ module.exports = View.extend({
         return parseFloat(x.toFixed(digits));
     },
 
+    translate : function(element, x, y) {
+        element.style["-webkit-transform"] = "translate(" + x + "px, " + y + "px)";
+        element.style["-moz-transform"]    = "translate(" + x + "px, " + y + "px)";
+        element.style["-ms-transform"]     = "translate(" + x + "px, " + y + "px)";
+        element.style["-o-transform"]      = "translate(" + x + "px, " + y + "px)";
+        element.style["transform"]         = "translate(" + x + "px, " + y + "px)";
+    },
+
     // update all items to use the correct height
     // by triggering a change on their model
     updateSeriesItems : function(){
@@ -42,6 +50,11 @@ module.exports = View.extend({
             var percentage = ((i+1) / (this.allNumberElements.length));
 
             this.allNumberElements[selected].innerText = this.round((maxNumber * percentage), 0);
+
+            percentage = ((i) / (this.allNumberElements.length + 1 ));
+            var parentContainerHeight = this.allNumberElements[selected].parentElement.clientHeight;
+            var pixelPercentage = this.round((parentContainerHeight * percentage), 0);
+            this.translate(this.allNumberElements[selected], 0, -pixelPercentage);
         }
     },
 
