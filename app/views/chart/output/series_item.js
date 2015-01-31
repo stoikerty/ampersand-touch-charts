@@ -5,7 +5,7 @@ module.exports = View.extend({
     template : templates.chart.output.series_item,
     autoRender : true,
     renderCSSonly : false,
-    
+
     bindings: {
         'model.name': {
             type: 'text',
@@ -13,39 +13,35 @@ module.exports = View.extend({
         },
         'model.value': {
             type: function (el, value, previousValue) {
-                // when the model changes, we don't want to re-render
+                // when the model changes, don't re-render,
                 // only change the height for the element
-                el.style.height = (value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
-
-                // NOTE: sadly this doesn't work
-                // when the maxDataSetValue changes,
-                // everything gets rerendered and destroyed :(
-                this.renderCSSonly = true;
+                this.updateInputHeight(el);
             },
             hook: 'value'
         }
     },
 
+    updateInputHeight : function(el){
+        this.valueEl = this.valueEl || this.el;
+        this.valueEl.style.height = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
+    },
+
     initialize : function(options){
         this.chartInterfaceModel = options.chartInterfaceModel;
 
-        this.model.on('change:value', function (model, val) {
-            console.log('value is now: ', val);
-            this.renderCSSonly = true;
+        var self = this;
+        self.model.on('change', function () {
+            self.updateInputHeight();
         });
     },
     render : function(options){
-        if (!this.renderCSSonly){
-            this.renderWithTemplate();
-        }
+        this.renderWithTemplate();
 
-        // caching element, still destroys an elment if the model changes
-        this.cacheElements({
-            valueEl: '[data-hook=value]'
-        });
+        // caching element
+        this.valueEl = this.queryByHook('value');
 
         // start by correctly rendering all values on the first run
-        this.valueEl.style.height = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100) + '%';
+        this.updateInputHeight();
 
         // fit every element of the collection into the series-chart
         this.el.style.width = (100 / this.collection.length) + '%';

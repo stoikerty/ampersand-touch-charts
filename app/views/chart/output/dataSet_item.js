@@ -17,16 +17,12 @@ module.exports = View.extend({
         this.chartInterfaceModel = options.chartInterfaceModel;
     },
     render : function(options){
-        //console.log(this.chartInterfaceModel.renderCSS);
-        //if (!this.chartInterfaceModel.renderCSS){
-            this.renderWithTemplate();
-        //}
+        this.renderWithTemplate();
 
         this.view = new SeriesView({
             el : this.queryByHook('series-container'),
             collection : this.model.series,
-            chartInterfaceModel : this.chartInterfaceModel//,
-            //options : options
+            chartInterfaceModel : this.chartInterfaceModel
         });
     }
 });
