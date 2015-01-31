@@ -44,18 +44,26 @@ module.exports = View.extend({
 
     // make the text in the numbers scale reflect the item values
     updateScaleNumbers : function(){
+        var parentContainerHeight =
+            this.nullNumberElement.parentElement.clientHeight
+            - this.nullNumberElement.clientHeight;
+
         for (i = 0; i < this.allNumberElements.length; i++){
             var selected = this.allNumberElements.length - (i + 1);
             var maxNumber = this.model.maxDataSetValue;
             var percentage = ((i+1) / (this.allNumberElements.length));
 
-            this.allNumberElements[selected].innerText = this.round((maxNumber * percentage), 0);
+            var roundedNumber = this.round(((maxNumber) * percentage), 0);
+            if (roundedNumber > 100) roundedNumber = this.round((roundedNumber / 10), 0) * 10;
+            if (roundedNumber > 1000) roundedNumber = this.round((roundedNumber / 100), 0) * 100;
+            this.allNumberElements[selected].innerText = roundedNumber;
 
-            percentage = ((i) / (this.allNumberElements.length + 1 ));
-            var parentContainerHeight = this.allNumberElements[selected].parentElement.clientHeight;
+            percentage = ((i) / (this.allNumberElements.length));
             var pixelPercentage = this.round((parentContainerHeight * percentage), 0);
-            this.translate(this.allNumberElements[selected], 0, -pixelPercentage);
+            this.translate(this.allNumberElements[i], 0, pixelPercentage);
         }
+        this.nullNumberElement.innerText = 0;
+        this.translate(this.nullNumberElement, 0, parentContainerHeight);
     },
 
     initialize : function(){
@@ -65,6 +73,7 @@ module.exports = View.extend({
 
         // cache scale number elements
         this.allNumberElements = this.queryAll('[data-hook="scale-number"]');
+        this.nullNumberElement = this.query('[data-hook="scale-null"]');
         this.updateScaleNumbers();
 
         this.renderCollection(

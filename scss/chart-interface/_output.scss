@@ -7,27 +7,29 @@
     background-color : #fff;
     @include box-shadow(0px 0px 3px rgba(#000, 0.2));
 
+    $dataSet-height : 300px;
+    $caption-height : 20px;
+
     .numbers{
-        @include position(absolute, block, $series-name-size, 100%);
-        left : 0px;
+        @include position(absolute, block, $series-name-size, $dataSet-height - ($caption-height * 1.5));
+        top   : $caption-height;
+        left  : 0px;
         color : #fff;
         background-color : rgba($blue, 0.2);
 
         .number{
             @include position(absolute, block, auto, 20px);
-            bottom : 0px;
-            right : 0px;
-            padding : 0 ($grid * 2);
+            top     : 0;
+            right   : 0px;
+            padding : 0 ($grid);
             //padding-bottom : $grid + 1px;
             color : #999;
             line-height : 20px;
-            background-color : rgba(#fff, 0.1);
+            background-color : rgba(#999, 0.1);
 
             @include transform(translateY(0px));
         }
     }
-
-    $dataSet-height : 300px;
 
     ul.dataSet{
         z-index : 1;
@@ -77,11 +79,11 @@
 
                 ul.series{
                     @include resetList;
-                    @include position(absolute, block, 100%, 90%);
+                    @include position(absolute, block, 100%, 100%);
                     bottom : 0;
                     left : 0;
                     margin : 0;
-                    padding : 0 15% 20px 15%;
+                    padding : ($caption-height + 6px) 15% $caption-height 15%;
 
                     li.series_item{
                         @include position(relative, block, 50%, 100%);
