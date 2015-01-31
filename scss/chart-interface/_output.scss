@@ -20,6 +20,7 @@
         color : #fff;
 
         .number{
+            @include isAnimated;
             @include position(absolute, block, auto, 20px);
             top     : 0;
             right   : 0px;
@@ -29,8 +30,6 @@
             font-size   : 13px;
             line-height : 20px;
 
-            @include transform(translateY(0px));
-
             &:after{
                 @include position(absolute, block, $grid, 50%);
                 top  : 50%;
@@ -39,6 +38,24 @@
                 //border-left : 1px solid $chart-border-color;
                 border-top : 1px solid $chart-border-color;
                 //border-right : 1px solid $chart-border-color;
+            }
+
+            .value{
+                @include transform-origin(100%, 50%);
+                @include transform(translateX(0px) translateY(0px));
+                @include transition(
+                    opacity ease-out 0.26s,
+                    transform ease-out 0.3s
+                );
+
+                &.updated{
+                    @include opacity(0);
+                    @include transform(scale(0.5) translateX(10px));
+                    @include transition(
+                        opacity ease-in 0.1s,
+                        transform ease-in 0.2s
+                    );
+                }
             }
         }
     }

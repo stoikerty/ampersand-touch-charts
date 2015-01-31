@@ -32,6 +32,20 @@ module.exports = View.extend({
         element.style["transform"]         = "translate(" + x + "px, " + y + "px)";
     },
 
+    animateUpdatedElement : function(element, number) {
+        if (element){
+            // animate element out of view
+            element.childNodes[0].classList.add('updated');
+            setTimeout(function(){
+                // update element text
+                element.childNodes[0].innerText = number;
+                // animate element into view again
+                element.childNodes[0].classList.remove('updated');
+            }, 200);
+        }
+        window.currentEl = element;
+    },
+
     // update all items to use the correct height
     // by triggering a change on their model
     updateSeriesItems : function(){
@@ -53,16 +67,20 @@ module.exports = View.extend({
             var maxNumber = this.model.maxDataSetValue;
             var percentage = ((i+1) / (this.allNumberElements.length));
 
+            // update with a sensibly rounded number
             var roundedNumber = this.round(((maxNumber) * percentage), 0);
             if (roundedNumber > 100) roundedNumber = this.round((roundedNumber / 10), 0) * 10;
             if (roundedNumber > 1000) roundedNumber = this.round((roundedNumber / 100), 0) * 100;
-            this.allNumberElements[selected].innerText = roundedNumber;
+            this.animateUpdatedElement(this.allNumberElements[selected], roundedNumber);
 
+            // set it into the correct position
             percentage = ((i) / (this.allNumberElements.length));
             var pixelPercentage = this.round((parentContainerHeight * percentage), 0);
             this.translate(this.allNumberElements[i], 0, pixelPercentage);
         }
-        this.nullNumberElement.innerText = 0;
+
+        // also animate null element and put it in its correct position
+        this.animateUpdatedElement(this.nullNumberElement, 0);
         this.translate(this.nullNumberElement, 0, parentContainerHeight);
     },
 
