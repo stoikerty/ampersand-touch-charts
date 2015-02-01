@@ -1,4 +1,11 @@
-How to use this folder
+ampersand touch charts
+======================
+
+An example of how one would create a chart-interface with draggable bar-charts. The models handle all the updating and everything is renered accordingly.
+
+---------------------
+
+Technical details: How to use this folder
 ======================
 
 Warning:
