@@ -16,8 +16,8 @@
     float : left;
     clear : both;
     overflow : hidden;
-    overflow-y : hidden; 
-    overflow-x : scroll;
+    // overflow-y : hidden; 
+    // overflow-x : scroll;
     padding : ($grid * 1.5) 0;
 
     $dataSet-height : 300px;
@@ -198,6 +198,14 @@
                                 @include transition(
                                     background-color ease-in-out 0.1s
                                 );
+
+                                &:before{
+                                    @include position(absolute, block, 200%, 400%);
+                                    top  : -150%;
+                                    left : -50%;
+                                    content : ' ';
+                                    //background-color : rgba(#000, 0);
+                                }
 
                                 .handle-value{
                                     @include isAnimated;

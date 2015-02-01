@@ -30,8 +30,9 @@
         margin : 0;
         padding : 0 0 $grid $series-name-size;
         white-space : nowrap;
-        overflow-y : hidden; 
-        overflow-x : scroll;
+        overflow : hidden;
+        // overflow-y : hidden; 
+        // overflow-x : scroll;
 
         li.dataSet_item{
             @include position(relative, inline-block, $dataSet_item-width);

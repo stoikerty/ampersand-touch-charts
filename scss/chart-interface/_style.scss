@@ -2,9 +2,9 @@
 
 .chart-interface{
     @include position(relative, block, 100%);
-    padding : 20px $grid;
+    padding : 10px $grid;
     margin : 0 auto;
-    max-width : 800px;
+    max-width : 560px;
 }
 
 @import "chart-interface/input";

@@ -10,8 +10,6 @@ module.exports = View.extend({
     },
     render : function(options){
         this.renderWithTemplate();
-        
-        console.log('document body rendered');
 
         this.interfaceContainerEl = this.queryByHook("interface-container");
 

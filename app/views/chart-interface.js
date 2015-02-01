@@ -15,8 +15,6 @@ module.exports = View.extend({
     render : function(options){
         this.renderWithTemplate();
 
-        console.log('rendering interface');
-
         // create the interface view
         this.view = new InputView({
             el : this.queryByHook("input-container"),
