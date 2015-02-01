@@ -42,7 +42,7 @@ module.exports = View.extend({
             element.childNodes[0].classList.add('updated');
             setTimeout(function(){
                 // update element text
-                element.childNodes[0].innerText = number;
+                element.childNodes[0].innerText = element.childNodes[0].textContent = number;
                 // animate element into view again
                 element.childNodes[0].classList.remove('updated');
             }, 200);

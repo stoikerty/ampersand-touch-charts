@@ -159,7 +159,7 @@ module.exports = View.extend({
         this.el.style.width = (100 / this.collection.length) + '%';
 
         this.handleValueEl = this.handleValueEl || this.queryByHook('handle-value');
-        this.handleValueEl.innerText = this.model.value;
+        this.handleValueEl.innerText = this.handleValueEl.textContent = this.model.value;
     },
 
     // ---

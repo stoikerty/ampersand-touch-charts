@@ -3,8 +3,7 @@ ampersand touch charts
 
 An example of how one would create a chart-interface with draggable bar-charts. The models handle all the updating and everything is renered accordingly.
 
-##### to debug:
-Firefox isn't updating the some number values.
+##### tested in Chrome, Chrome for Android, Firefox & IE11
 
 ---------------------
 
