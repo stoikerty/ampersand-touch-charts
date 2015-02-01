@@ -122,6 +122,7 @@
                         @include opacity(0.9);
                         border-color : #bbb;
                         border-left : 1px solid #bbb;
+                        background-color : #999;
                         @include background-image(
                             linear-gradient(left, rgba(#777, 1), #999 30%)
                         );
@@ -130,25 +131,28 @@
 
                 &:nth-child(1) .name:before{
                     border-color : $red-light;
-                    //background-color : $red;
+                    background-color : $red;
                     @include background-image(
                         linear-gradient(left, rgba($red-dark, 1), $red 30%)
                     );
                 }
                 &:nth-child(2) .name:before{
                     border-color : $blue-light;
+                    background-color : $blue;
                     @include background-image(
                         linear-gradient(left, rgba($blue-dark, 1), $blue 30%)
                     );
                 }
                 &:nth-child(3) .name:before{
                     border-color : $green-light;
+                    background-color : $green;
                     @include background-image(
                         linear-gradient(left, rgba($green-dark, 1), $green 30%)
                     );
                 }
                 &:nth-child(4) .name:before{
                     border-color : $orange-light;
+                    background-color : $orange;
                     @include background-image(
                         linear-gradient(left, rgba($orange-dark, 1), $orange 30%)
                     );
