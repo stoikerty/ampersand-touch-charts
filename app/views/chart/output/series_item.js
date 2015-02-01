@@ -17,7 +17,7 @@ module.exports = View.extend({
             type: function (el, value, previousValue) {
                 // when the model changes, don't re-render,
                 // only change the height for the element
-                debounce(this.updateStyle(el), 200);
+                debounce(this.updateStyle(el), 500);
                 //this.updateStyle(el)
             },
             hook: 'value'

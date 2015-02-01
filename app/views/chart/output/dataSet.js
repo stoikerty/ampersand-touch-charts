@@ -1,6 +1,7 @@
 var View = require('ampersand-view');
 var templates = require('../../../templates');
 var DataSet_itemView = require('./dataSet_item');
+var debounce = require('amp-debounce');
 
 module.exports = View.extend({
     template : templates.chart.output.dataSet,
@@ -79,7 +80,9 @@ module.exports = View.extend({
             var roundedNumber = this.round((maxNumber * percentage), 0);
             if (roundedNumber > 100) roundedNumber = this.round((roundedNumber / 10), 0) * 10;
             
-            this.animateUpdatedElement(this.allNumberElements[selected], roundedNumber);
+            debounce(
+                this.animateUpdatedElement(this.allNumberElements[selected], roundedNumber)
+            , 500);
 
             // set it into the correct position
             percentage = (i / this.allNumberElements.length);
@@ -88,7 +91,9 @@ module.exports = View.extend({
         }
 
         // also animate null element and put it in its correct position
-        this.animateUpdatedElement(this.nullNumberElement, 0);
+        debounce(
+            this.animateUpdatedElement(this.nullNumberElement, 0)
+        , 500);
         this.translate(this.nullNumberElement, 0, parentContainerHeight);
     },
 
