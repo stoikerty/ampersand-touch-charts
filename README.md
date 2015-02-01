@@ -29,16 +29,22 @@ And install all npm dependencies:
 
 Building the final project files
 --------------------------------
+Compile scss stylesheets using compass,
 > compass compile
+
+then create a new build. this will create hashed, minified `.js` & `.css` files
 > npm run build
 
 You should now have a folder called "_build" with all the necessary files to upload to your server.
 
 Using the project folder as a development server
 ------------------------------------------------
+Run scss compilation continuously in a second terminal,
 > compass watch
+
+then start the server at localhost:3000
 > npm run server
 
-You now have a livereload server running that refreshes on CSS changes.
+You now have a livereload server running that refreshes on CSS changes. Don't forget to install the livereload browser plugin.
 
-Make sure to restart the server when you add a new npm-module.
+You have to restart the server when you add a new npm-module.
