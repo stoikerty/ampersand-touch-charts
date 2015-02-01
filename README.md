@@ -4,8 +4,7 @@ ampersand touch charts
 An example of how one would create a chart-interface with draggable bar-charts. The models handle all the updating and everything is renered accordingly.
 
 ##### to debug:
-IE is not displaying the top left captions correctly.
-Firefox isn't updating the number values for some reason.
+Firefox isn't updating the some number values.
 
 ---------------------
 
