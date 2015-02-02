@@ -1,11 +1,11 @@
 ampersand touch charts
 ======================
 
-An example of how one would create a chart-interface with draggable bar-charts. The models handle all the updating and everything is renered accordingly.
+An example of how one would create a chart-interface with draggable bars. The state-models handle all the updating and everything is rendered accordingly.
 
 ##### tested in Chrome, Chrome for Android, Firefox & IE11
 
-There was quite a bit of experimenting and trial & error before I got this one working.
+There was quite a bit of experimenting and trial & error before I got this one working. I first created a draft interface, just like with [the curious circle](https://github.com/stoikerty/the-curious-circle). But this time I also made sure to build an extendable model-structure (you can add more data to the sample-data and it will render it as well).
 
 ![alt tag](https://github.com/stoikerty/ampersand-touch-charts/blob/master/footage/Slide-01.jpg)
 
