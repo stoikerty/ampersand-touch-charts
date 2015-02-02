@@ -43,7 +43,7 @@
 
     // chart\interface.jade compiled template
     templatizer["chart"]["interface"] = function tmpl_chart_interface() {
-        return '<div class="chart-interface"><div class="input"><div data-hook="input-container" class="input-container"></div></div><div class="output"><div data-hook="output-container" class="output-container"></div></div></div>';
+        return '<div class="chart-interface"><div class="input"><div data-hook="input-container" class="input-container"></div></div><div class="output"><div data-hook="output-container" class="output-container"> </div></div><div class="explanation"><p>Touch-Charts created with ampersandjs, scss & hammerjs.<br>Find the source code on Github<br><a href="https://github.com/stoikerty/ampersand-touch-charts">https://github.com/stoikerty/ampersand-touch-charts</a></p><p>Jorge Antunes<br><a href="https://twitter.com/stoikerty">@stoikerty</a></p></div></div>';
     };
 
     // chart\output\dataSet.jade compiled template

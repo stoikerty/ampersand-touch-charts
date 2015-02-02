@@ -5,6 +5,37 @@
     padding : 10px $grid;
     margin : 0 auto;
     max-width : 560px;
+
+    .explanation{
+        @include position(relative, block, 100%);
+        float   : left;
+        clear   : both;
+        p{
+            padding : ($grid * 2) $grid;
+            margin : 0;
+
+            text-align  : center;
+            font-size   : 15px;
+            line-height : 1.6em;
+            color       : #777;
+
+            a{
+                color     : $blue;
+                font-size : 13px;
+            }
+
+            &:last-child{
+                padding : $grid;
+                @include opacity(0.6);
+                border-top : 1px solid #ccc;
+
+                a{
+                    text-decoration : none;
+                    font-size : 12px;
+                }
+            }
+        }
+    }
 }
 
 @import "chart-interface/input";
