@@ -5,6 +5,10 @@ An example of how one would create a chart-interface with draggable bar-charts. 
 
 ##### tested in Chrome, Chrome for Android, Firefox & IE11
 
+There was quite a bit of experimenting and trial & error before I got this one working.
+
+![alt tag](https://github.com/stoikerty/ampersand-touch-charts/blob/master/footage/Slide-01.jpg)
+
 ---------------------
 
 Technical details: How to use this folder
