@@ -9,6 +9,8 @@ There was quite a bit of experimenting and trial & error before I got this one w
 
 ![alt tag](https://github.com/stoikerty/ampersand-touch-charts/blob/master/footage/Slide-01.jpg)
 
+![alt tag](https://github.com/stoikerty/ampersand-touch-charts/blob/master/footage/Slide-02.jpg)
+
 ---------------------
 
 Technical details: How to use this folder
