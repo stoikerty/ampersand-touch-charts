@@ -2,8 +2,9 @@
   "name": "stk-toolbox-project",
   "version": "0.0.0",
   "description": "{ Project }",
-  "main": "run-server.js",
+  "main": "node run-server.js",
   "scripts": {
+    "start": "node run-server.js",
     "server": "node run-server.js",
     "build": "node run-build.js"
   },
