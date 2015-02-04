@@ -82,12 +82,12 @@
                 );
 
                 &.updated{
-                    @include opacity(0);
-                    @include transform(scale(0.5) translateX(10px));
-                    @include transition(
-                        opacity ease-in 0.1s,
-                        transform ease-in 0.2s
-                    );
+                    // @include opacity(0);
+                    // @include transform(scale(0.5) translateX(10px));
+                    // @include transition(
+                    //     opacity ease-in 0.1s,
+                    //     transform ease-in 0.2s
+                    // );
                 }
             }
         }
@@ -164,9 +164,9 @@
                             font-size  : 10px;
                             color : rgba(#fff, 0.8);
 
-                            @include transition(
-                                height $ease-in-out-quart 0.4s 0.1s
-                            );
+                            // @include transition(
+                            //     height $ease-in-out-quart 0.4s 0.1s
+                            // );
 
                             // @include box-shadow(
                             //     2px 2px 1px 0px rgba(#000, 0.1),

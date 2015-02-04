@@ -15,7 +15,9 @@ module.exports = View.extend({
         },
         'model.maxDataSetValue': {
             type: function (el, value, previousValue) {
+                // animate on the next available frame
                 this.dataHasChanged = true;
+                this.updateSeriesItems();
             },
             hook: 'value'
         }
@@ -69,7 +71,6 @@ module.exports = View.extend({
 
             // animate
             console.log('animating');
-            this.updateSeriesItems();
 
             if (this.dataHasChanged){
                 this.updateScaleNumbers();   
