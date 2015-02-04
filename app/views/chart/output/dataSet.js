@@ -15,8 +15,7 @@ module.exports = View.extend({
         },
         'model.maxDataSetValue': {
             type: function (el, value, previousValue) {
-                this.updateSeriesItems();
-                this.updateScaleNumbers();    
+                this.dataHasChanged = true;
             },
             hook: 'value'
         }
@@ -52,6 +51,7 @@ module.exports = View.extend({
     },
 
     animationTrigger : 0,
+    dataHasChanged : true,
 
     // ---
     // Animate if values have changed
@@ -64,11 +64,17 @@ module.exports = View.extend({
 
         // throttle animation
         this.animationTrigger++;
-        if (this.animationTrigger > 10) {
+        if (this.animationTrigger > 30) {
             this.animationTrigger = 0;
 
             // animate
             console.log('animating');
+            this.updateSeriesItems();
+
+            if (this.dataHasChanged){
+                this.updateScaleNumbers();   
+                this.dataHasChanged = false; 
+            }
         }
     },
 
@@ -102,9 +108,7 @@ module.exports = View.extend({
             var roundedNumber = this.round((maxNumber * percentage), 0);
             if (roundedNumber > 100) roundedNumber = this.round((roundedNumber / 10), 0) * 10;
             
-            debounce(
-                this.animateUpdatedElement(this.allNumberElements[selected], roundedNumber)
-            , 500);
+            this.animateUpdatedElement(this.allNumberElements[selected], roundedNumber);
 
             // set it into the correct position
             percentage = (i / this.allNumberElements.length);
@@ -113,9 +117,7 @@ module.exports = View.extend({
         }
 
         // also animate null element and put it in its correct position
-        debounce(
-            this.animateUpdatedElement(this.nullNumberElement, 0)
-        , 500);
+        this.animateUpdatedElement(this.nullNumberElement, 0);
         this.translate(this.nullNumberElement, 0, parentContainerHeight);
     },
 
@@ -130,7 +132,7 @@ module.exports = View.extend({
         // cache scale number elements
         this.allNumberElements = this.queryAll('[data-hook="scale-number"]');
         this.nullNumberElement = this.query('[data-hook="scale-null"]');
-        this.updateScaleNumbers();
+        //this.updateScaleNumbers();
 
         self.animate();
 
