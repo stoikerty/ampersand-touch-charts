@@ -2,7 +2,6 @@ var View = require('ampersand-view');
 var templates = require('../../../templates');
 var DataSet_itemView = require('./dataSet_item');
 var debounce = require('amp-debounce');
-var requestAnimationFrame = require('raf-component');
 
 module.exports = View.extend({
     template : templates.chart.output.dataSet,
@@ -52,7 +51,6 @@ module.exports = View.extend({
         }
     },
 
-    animationTrigger : 0,
     dataHasChanged : true,
 
     // ---
@@ -60,22 +58,12 @@ module.exports = View.extend({
     // ---
 
     animate : function(){
-        // pass the animation function into raf
-        // bind `this` explicitly to keep function context
-        requestAnimationFrame(this.animate.bind(this));
+        // add current Animation to Stack
+        // app.addAnimation(this, this.animate);
 
-        // throttle animation
-        this.animationTrigger++;
-        if (this.animationTrigger > 30) {
-            this.animationTrigger = 0;
-
-            // animate
-            console.log('animating');
-
-            if (this.dataHasChanged){
-                this.updateScaleNumbers();   
-                this.dataHasChanged = false; 
-            }
+        if (this.dataHasChanged){
+            this.updateScaleNumbers();   
+            this.dataHasChanged = false; 
         }
     },
 
@@ -127,15 +115,14 @@ module.exports = View.extend({
     initialize : function(){
     },
     render : function(options){
-        var self = this;
         this.renderWithTemplate();
 
         // cache scale number elements
         this.allNumberElements = this.queryAll('[data-hook="scale-number"]');
         this.nullNumberElement = this.query('[data-hook="scale-null"]');
-        //this.updateScaleNumbers();
 
-        self.animate();
+        this.updateScaleNumbers();
+        this.animate();
 
         this.renderCollection(
             this.model.dataSet,
