@@ -58,9 +58,6 @@ module.exports = View.extend({
     // ---
 
     animate : function(){
-        // add current Animation to Stack
-        // app.addAnimation(this, this.animate);
-
         if (this.dataHasChanged){
             this.updateScaleNumbers();   
             this.dataHasChanged = false; 
@@ -113,6 +110,8 @@ module.exports = View.extend({
     // ---
 
     initialize : function(){
+        // add current Animation to Stack
+        app.addAnimation(this, this.animate);
     },
     render : function(options){
         this.renderWithTemplate();
@@ -122,7 +121,6 @@ module.exports = View.extend({
         this.nullNumberElement = this.query('[data-hook="scale-null"]');
 
         this.updateScaleNumbers();
-        this.animate();
 
         this.renderCollection(
             this.model.dataSet,

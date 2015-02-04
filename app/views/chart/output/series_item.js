@@ -17,8 +17,7 @@ module.exports = View.extend({
             type: function (el, value, previousValue) {
                 // when the model changes, don't re-render,
                 // only change the height for the element
-                debounce(this.updateStyle(el), 500);
-                //this.updateStyle(el)
+                //debounce(this.updateStyle(el), 500);
             },
             hook: 'value'
         }
@@ -31,6 +30,14 @@ module.exports = View.extend({
     round : function(x, digits){
         if (x < 1) x = 0;
         return parseFloat(x.toFixed(digits));
+    },
+
+    scale : function(element, x, y) {
+        element.style["-webkit-transform"] = "scale(" + x + ", " + y + ")";
+        element.style["-moz-transform"]    = "scale(" + x + ", " + y + ")";
+        element.style["-ms-transform"]     = "scale(" + x + ", " + y + ")";
+        element.style["-o-transform"]      = "scale(" + x + ", " + y + ")";
+        element.style["transform"]         = "scale(" + x + ", " + y + ")";
     },
 
     // ---
@@ -144,15 +151,16 @@ module.exports = View.extend({
     // update the height of a bar when the model changes
     // ---
 
-    updateStyle : function(el){
+    updateStyle : function(){
         this.valueEl = this.valueEl || this.el;
 
         // transform the bar-height to the approriate % value
         if (this.chartInterfaceModel.maxDataSetValue == 0){
-            this.valueEl.style.height = 0;
+            this.scale(this.valueEl, 1, 0);
         } else {
-            var currentHeightPercentage = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100);
-            this.valueEl.style.height = currentHeightPercentage + '%';
+            var currentHeightPercentage = (this.model.value / this.chartInterfaceModel.maxDataSetValue);
+            //this.valueEl.style.height = currentHeightPercentage + '%';
+            this.scale(this.valueEl, 1, currentHeightPercentage);
         }
 
         // fit every element of the collection into the series-chart
@@ -169,11 +177,14 @@ module.exports = View.extend({
 
         var self = this;
         self.model.on('change', function () {
-            self.updateStyle();
+            //self.updateStyle();
         });
         self.model.on('maxValueChanged', function () {
             self.maxValueChanged();
         });
+
+        // add current Animation to Stack
+        app.addAnimation(this, this.updateStyle);
     },
     render : function(options){
         this.renderWithTemplate();
@@ -185,8 +196,5 @@ module.exports = View.extend({
 
         // touch events using hammerjs
         this.registerHandleEvents();
-
-        // update the element style
-        this.updateStyle();
     }
 });

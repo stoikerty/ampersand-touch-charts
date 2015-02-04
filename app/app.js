@@ -50,13 +50,13 @@ window.app = {
 
         // throttle animation
         this.animationTrigger++;
-        if (this.animationTrigger > 30) {
+        if (this.animationTrigger > 1) {
             this.animationTrigger = 0;
 
-            console.log('animating', app);
-            console.log(this.animationCallback.length);
+            //console.log('animating', app);
+            //console.log(this.animationCallback.length);
             for (var i=0; i<this.animationCallback.length; i++){
-                console.log(i);
+                //console.log(i);
                 this.animationCallback[i].call(this.animationContext[i]);
             }
         }
