@@ -2,6 +2,7 @@ var View = require('ampersand-view');
 var templates = require('../../../templates');
 var DataSet_itemView = require('./dataSet_item');
 var debounce = require('amp-debounce');
+var requestAnimationFrame = require('raf-component');
 
 module.exports = View.extend({
     template : templates.chart.output.dataSet,
@@ -47,6 +48,27 @@ module.exports = View.extend({
                 // animate element into view again
                 element.childNodes[0].classList.remove('updated');
             }, 200);
+        }
+    },
+
+    animationTrigger : 0,
+
+    // ---
+    // Animate if values have changed
+    // ---
+
+    animate : function(){
+        // pass the animation function into raf
+        // bind `this` explicitly to keep function context
+        requestAnimationFrame(this.animate.bind(this));
+
+        // throttle animation
+        this.animationTrigger++;
+        if (this.animationTrigger > 10) {
+            this.animationTrigger = 0;
+
+
+            console.log('animating');
         }
     },
 
@@ -102,12 +124,15 @@ module.exports = View.extend({
     initialize : function(){
     },
     render : function(options){
+        var self = this;
         this.renderWithTemplate();
 
         // cache scale number elements
         this.allNumberElements = this.queryAll('[data-hook="scale-number"]');
         this.nullNumberElement = this.query('[data-hook="scale-null"]');
         this.updateScaleNumbers();
+
+        self.animate();
 
         this.renderCollection(
             this.model.dataSet,
