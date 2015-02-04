@@ -40,6 +40,14 @@ module.exports = View.extend({
         element.style["transform"]         = "scale(" + x + ", " + y + ")";
     },
 
+    translate : function(element, x, y) {
+        element.style["-webkit-transform"] = "translate(" + x + "px, " + y + "px)";
+        element.style["-moz-transform"]    = "translate(" + x + "px, " + y + "px)";
+        element.style["-ms-transform"]     = "translate(" + x + "px, " + y + "px)";
+        element.style["-o-transform"]      = "translate(" + x + "px, " + y + "px)";
+        element.style["transform"]         = "translate(" + x + "px, " + y + "px)";
+    },
+
     // ---
     // handle logic
     // ---
@@ -154,19 +162,18 @@ module.exports = View.extend({
     updateStyle : function(){
         this.valueEl = this.valueEl || this.el;
 
+        var valueHeightPercentage = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100);
+        var valueHeightPixels = this.el.clientHeight / 100 * valueHeightPercentage;
+
         // transform the bar-height to the approriate % value
         if (this.chartInterfaceModel.maxDataSetValue == 0){
             this.scale(this.valueEl, 1, 0);
         } else {
             var currentHeightPercentage = (this.model.value / this.chartInterfaceModel.maxDataSetValue);
-            //this.valueEl.style.height = currentHeightPercentage + '%';
             this.scale(this.valueEl, 1, currentHeightPercentage);
         }
 
-        // fit every element of the collection into the series-chart
-        this.el.style.width = (100 / this.collection.length) + '%';
-
-        this.handleValueEl = this.handleValueEl || this.queryByHook('handle-value');
+        this.translate(this.handleEl, 0, -valueHeightPixels);
         this.handleValueEl.innerText = this.handleValueEl.textContent = this.model.value;
     },
 
@@ -176,9 +183,9 @@ module.exports = View.extend({
         this.chartInterfaceModel = options.chartInterfaceModel;
 
         var self = this;
-        self.model.on('change', function () {
-            //self.updateStyle();
-        });
+        // self.model.on('change', function () {
+        //     //self.updateStyle();
+        // });
         self.model.on('maxValueChanged', function () {
             self.maxValueChanged();
         });
@@ -193,6 +200,9 @@ module.exports = View.extend({
         this.valueEl = this.queryByHook('value');
         this.handleEl = this.queryByHook('handle');
         this.handleValueEl = this.queryByHook('handle-value');
+
+        // fit every element of the collection into the series-chart
+        this.el.style.width = (100 / this.collection.length) + '%';
 
         // touch events using hammerjs
         this.registerHandleEvents();

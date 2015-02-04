@@ -168,9 +168,9 @@
                             // @include transition(
                             //     height $ease-in-out-quart 0.4s 0.1s
                             // );
-                            // @include transition(
-                            //     transform $ease-in-out-quart 0.4s 0.1s
-                            // );
+                            @include transition(
+                                transform $ease-in-out-quart 0.2s 0.1s
+                            );
 
                             // @include box-shadow(
                             //     2px 2px 1px 0px rgba(#000, 0.1),
@@ -194,7 +194,7 @@
                             @include isButton;
                             @include isAnimated;
                             @include position(absolute, block, 90%, 12px);
-                            top  : -16px;
+                            bottom : 4px;
                             left : 4%;
                             background-color : #fafafa;
                             border        : 1px solid rgba(#000, 0.06);
@@ -205,6 +205,10 @@
                             // @include transition(
                             //     background-color ease-in-out 0.1s
                             // );
+                            @include transition(
+                                transform $ease-in-out-quart 0.2s 0.1s
+                            );
+                            @include transform(translateY(-10px));
 
                             &:before{
                                 @include position(absolute, block, 200%, 400%);
@@ -233,6 +237,7 @@
                                 color : #777;
                                 font-size   : 16px;
                                 line-height : 24px;
+                                text-align : center;
 
                                 @include transform(translateX(30px) scale(0.5));
                                 @include opacity(0);
@@ -246,6 +251,7 @@
 
                             &.is-touched{
                                 background-color : #bbb;
+                                @include transition(none);
 
                                 .handle-value{
                                     @include transform(translateX(0px) scale(1));
