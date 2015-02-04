@@ -67,7 +67,7 @@ module.exports = View.extend({
         if (this.animationTrigger > 10) {
             this.animationTrigger = 0;
 
-
+            // animate
             console.log('animating');
         }
     },
