@@ -50,7 +50,7 @@ window.app = {
 
         // throttle animation
         this.animationTrigger++;
-        if (this.animationTrigger > 1) {
+        if (this.animationTrigger > 0) {
             this.animationTrigger = 0;
 
             //console.log('animating', app);
