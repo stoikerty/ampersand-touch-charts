@@ -21,6 +21,7 @@
     "livereload": "^0.3.4",
     "moonboots-static": "^1.2.0",
     "moonboots_hapi": "^2.4.0",
+    "raf-component": "^1.1.2",
     "templatizer": "^1.0.1"
   }
 }

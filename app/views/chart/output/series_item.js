@@ -17,8 +17,7 @@ module.exports = View.extend({
             type: function (el, value, previousValue) {
                 // when the model changes, don't re-render,
                 // only change the height for the element
-                debounce(this.updateStyle(el), 500);
-                //this.updateStyle(el)
+                //debounce(this.updateStyle(el), 500);
             },
             hook: 'value'
         }
@@ -31,6 +30,22 @@ module.exports = View.extend({
     round : function(x, digits){
         if (x < 1) x = 0;
         return parseFloat(x.toFixed(digits));
+    },
+
+    scale : function(element, x, y) {
+        element.style["-webkit-transform"] = "scale(" + x + ", " + y + ")";
+        element.style["-moz-transform"]    = "scale(" + x + ", " + y + ")";
+        element.style["-ms-transform"]     = "scale(" + x + ", " + y + ")";
+        element.style["-o-transform"]      = "scale(" + x + ", " + y + ")";
+        element.style["transform"]         = "scale(" + x + ", " + y + ")";
+    },
+
+    translate : function(element, x, y) {
+        element.style["-webkit-transform"] = "translate(" + x + "px, " + y + "px)";
+        element.style["-moz-transform"]    = "translate(" + x + "px, " + y + "px)";
+        element.style["-ms-transform"]     = "translate(" + x + "px, " + y + "px)";
+        element.style["-o-transform"]      = "translate(" + x + "px, " + y + "px)";
+        element.style["transform"]         = "translate(" + x + "px, " + y + "px)";
     },
 
     // ---
@@ -144,21 +159,21 @@ module.exports = View.extend({
     // update the height of a bar when the model changes
     // ---
 
-    updateStyle : function(el){
+    updateStyle : function(){
         this.valueEl = this.valueEl || this.el;
+
+        var valueHeightPercentage = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100);
+        var valueHeightPixels = this.el.clientHeight / 100 * valueHeightPercentage;
 
         // transform the bar-height to the approriate % value
         if (this.chartInterfaceModel.maxDataSetValue == 0){
-            this.valueEl.style.height = 0;
+            this.scale(this.valueEl, 1, 0);
         } else {
-            var currentHeightPercentage = (this.model.value / this.chartInterfaceModel.maxDataSetValue * 100);
-            this.valueEl.style.height = currentHeightPercentage + '%';
+            var currentHeightPercentage = (this.model.value / this.chartInterfaceModel.maxDataSetValue);
+            this.scale(this.valueEl, 1, currentHeightPercentage);
         }
 
-        // fit every element of the collection into the series-chart
-        this.el.style.width = (100 / this.collection.length) + '%';
-
-        this.handleValueEl = this.handleValueEl || this.queryByHook('handle-value');
+        this.translate(this.handleEl, 0, -valueHeightPixels);
         this.handleValueEl.innerText = this.handleValueEl.textContent = this.model.value;
     },
 
@@ -168,12 +183,15 @@ module.exports = View.extend({
         this.chartInterfaceModel = options.chartInterfaceModel;
 
         var self = this;
-        self.model.on('change', function () {
-            self.updateStyle();
-        });
+        // self.model.on('change', function () {
+        //     //self.updateStyle();
+        // });
         self.model.on('maxValueChanged', function () {
             self.maxValueChanged();
         });
+
+        // add current Animation to Stack
+        app.addAnimation(this, this.updateStyle);
     },
     render : function(options){
         this.renderWithTemplate();
@@ -183,10 +201,10 @@ module.exports = View.extend({
         this.handleEl = this.queryByHook('handle');
         this.handleValueEl = this.queryByHook('handle-value');
 
+        // fit every element of the collection into the series-chart
+        this.el.style.width = (100 / this.collection.length) + '%';
+
         // touch events using hammerjs
         this.registerHandleEvents();
-
-        // update the element style
-        this.updateStyle();
     }
 });

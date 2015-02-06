@@ -33,6 +33,7 @@ module.exports = View.extend({
         this.renderWithTemplate();
 
         this.valueEl = this.queryByHook('value');
+        //console.log('rendering');
     },
 
     valueChanged: function () {

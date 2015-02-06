@@ -13,6 +13,15 @@ There was quite a bit of experimenting and trial & error before I got this one w
 
 ---------------------
 
+Personal Notes
+==============
+
+All while developing this small example, I was wondering if switching to React would make things easier or better performing for using animations. First and foremost, when you're trying to do anything interactive that involves a lot of visual manipulation, it is of utmost importance to understand the limitations of browsers and (what CSS-properties you can use)[http://stackoverflow.com/questions/16185639/list-of-hardware-accelerated-css-properties-for-mobile-safari/20633548#20633548] to keep performance as smooth as possible. Having that in mind, I did find some resources on why animations in React can be unconventional to implement and why I stuck with simple ampersand/backbone-views with an custom animation-stack based on RequestAnimationFrame.
+(React Review, under "Accidental Complexity")[http://www.letscodejavascript.com/v3/blog/2014/09/react_review]
+(How to implement transitions and animations in React)[http://facebook.github.io/react/docs/animation.html]
+
+---------------------
+
 Technical details: How to use this folder
 ======================
 
